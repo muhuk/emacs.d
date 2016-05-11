@@ -10,18 +10,8 @@
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
-
-
-;; Ensure these packages are set-up
-(defvar user-packages
-  '(paredit
-    clojure-mode
-    clojure-mode-extra-font-locking
-    cider
-    rainbow-delimiters))
-(dolist (p user-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
 
 
 ;; Manually installed packages
@@ -77,32 +67,52 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
-;; Clojure
-(add-hook 'clojure-mode-hook 'enable-paredit-mode)
-(add-hook 'clojure-mode-hook 'subword-mode)
-(require 'clojure-mode-extra-font-locking)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(setq cider-repl-pop-to-buffer-on-connect t)
-(setq cider-show-error-buffer t)
-(setq cider-auto-select-error-buffer t)
-(setq cider-repl-history-file "~/.emacs.d/cider-history")
-(setq cider-repl-wrap-history t)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-(add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-(add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-(add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
-(add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode))
-
-
 ;; ELisp / Scheme
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 ;; eldoc-mode shows documentation in the minibuffer when writing code
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+
+(use-package cider
+  :ensure t
+  :init
+  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  :config
+  (setq cider-repl-pop-to-buffer-on-connect t)
+  (setq cider-show-error-buffer t)
+  (setq cider-auto-select-error-buffer t)
+  (setq cider-repl-history-file "~/.emacs.d/cider-history")
+  (setq cider-repl-wrap-history t)
+  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
+
+
+(use-package clojure-mode
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'subword-mode))
+
+
+(use-package clojure-mode-extra-font-locking
+  :ensure t)
+
+
+(use-package paredit
+  :ensure t
+  :init
+  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+  (add-hook 'cider-repl-mode-hook 'paredit-mode))
+
+
+(use-package rainbow-delimiters
+  :ensure t)
