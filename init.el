@@ -101,6 +101,12 @@
   :ensure t)
 
 
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
+
 (use-package paredit
   :ensure t
   :init
@@ -116,3 +122,13 @@
 
 (use-package rainbow-delimiters
   :ensure t)
+
+
+(use-package stack-mode
+  :ensure t
+  :init
+  (add-hook 'haskell-mode-hook 'stack-mode))
+
+
+(provide 'init)
+
