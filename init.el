@@ -46,17 +46,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
-;; UI - Themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'load-path "~/.emacs.d/themes")
-;; (load-theme 'tango-dark t)
-;; (load-theme 'tomorrow-day t)
-;; (load-theme 'tomorrow-night t)
-(load-theme 'tomorrow-night-bright t)
-;; (load-theme 'tomorrow-night-eighties t)
-;; (load-theme 'zenburn t)
-
-
 ;; InteractivelyDoThings
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
@@ -74,6 +63,15 @@
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
 
+;; Themes
+;;   flatland-theme
+;;   flatui-theme
+;;   planet-theme
+(use-package planet-theme
+  :ensure t)
+
+
+;; Packages
 (use-package cider
   :ensure t
   :init
