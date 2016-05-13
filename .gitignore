@@ -1,5 +1,7 @@
 .#*
+.recentf
 auto-save-list
 backups
+cider-history
 elpa
 ido.last

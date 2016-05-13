@@ -107,6 +107,20 @@
   (global-flycheck-mode))
 
 
+(use-package ghc
+  :ensure t
+  :init
+  (autoload 'ghc-init "ghc" nil t)
+  (autoload 'ghc-debug "ghc" nil t)
+  (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
+
+
+(use-package haskell-mode
+  :ensure t
+  :config
+  (load "haskell-mode-autoloads"))
+
+
 (use-package paredit
   :ensure t
   :init
@@ -122,13 +136,4 @@
 
 (use-package rainbow-delimiters
   :ensure t)
-
-
-(use-package stack-mode
-  :ensure t
-  :init
-  (add-hook 'haskell-mode-hook 'stack-mode))
-
-
-(provide 'init)
 
