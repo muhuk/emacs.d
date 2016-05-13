@@ -64,10 +64,12 @@
 
 
 ;; Themes
+;;   darkburn-theme
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   planet-theme
-(use-package planet-theme
+;;   twilight-bright-theme
+(use-package twilight-bright-theme
   :ensure t)
 
 
