@@ -12,6 +12,8 @@
   (package-refresh-contents))
 (when (not (package-installed-p 'use-package))
   (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
 
 
 ;; Manually installed packages
@@ -37,8 +39,6 @@
 (show-paren-mode 1)
 (global-linum-mode 1)
 (global-hl-line-mode 1)
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (set-face-attribute 'default nil :height 140)
 (blink-cursor-mode 0)
 ;; full path in title bar
@@ -78,7 +78,6 @@
   :ensure t
   :init
   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-  :config
   (setq cider-repl-pop-to-buffer-on-connect t)
   (setq cider-show-error-buffer t)
   (setq cider-auto-select-error-buffer t)
@@ -103,8 +102,22 @@
 
 (use-package flycheck
   :ensure t
-  :init
+  :config
   (global-flycheck-mode))
+
+
+(use-package flycheck-clojure
+  :ensure t
+  :config
+  (eval-after-load 'flycheck '(flycheck-clojure-setup)))
+
+
+(use-package flycheck-ghcmod
+  :ensure t)
+
+
+(use-package flycheck-haskell
+  :ensure t)
 
 
 (use-package ghc
@@ -134,16 +147,28 @@
   (add-hook 'cider-repl-mode-hook 'paredit-mode))
 
 
+(use-package powerline
+  :ensure t
+  :config
+  (display-time-mode -1))
+
+
 (use-package rainbow-delimiters
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 
 (use-package smex
   :ensure t
   :bind
   (("M-x" . smex)
-   ("M-x" . smex-major-mode-commands)
+   ;; ("M-x" . smex-major-mode-commands)
    ;; Vanilla M-x
    ("C-c C-c C-c" . execute-extended-command))
   :init
   (smex-initialize))
+
+
+(use-package yaml-mode
+  :ensure t)
