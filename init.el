@@ -74,6 +74,34 @@
 
 
 ;; Packages
+(use-package auto-complete
+  :ensure t
+  :init
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  :config
+  (ac-config-default))
+
+
+(use-package ac-cider
+  :ensure t
+  :init
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  :config
+  (add-to-list 'ac-modes 'cider-mode)
+  (add-to-list 'ac-modes 'cider-repl-mode))
+
+
+(use-package ac-haskell-process
+  :ensure t
+  :config
+  (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
+  (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
+  (eval-after-load "auto-complete"
+    '(add-to-list 'ac-modes 'haskell-interactive-mode)))
+
+
 (use-package cider
   :ensure t
   :init
