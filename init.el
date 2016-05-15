@@ -154,6 +154,10 @@
   :ensure t)
 
 
+(use-package flycheck-ledger
+  :ensure t)
+
+
 (use-package ghc
   :ensure t
   :init
@@ -178,6 +182,12 @@
   (setq ido-use-virtual-buffers t)
   (setq ido-everywhere t)
   (global-set-key (kbd "C-x C-b") 'ibuffer))
+
+
+(use-package ledger-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
 
 
 (use-package paredit
