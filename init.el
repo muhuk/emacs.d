@@ -1,3 +1,9 @@
+;;; init.el --- Configuration
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Package repositories
 ;; default: ("gnu" . "http://elpa.gnu.org/packages/")
 (require 'package)
@@ -44,16 +50,6 @@
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
 (fset 'yes-or-no-p 'y-or-n-p)
-
-
-;; InteractivelyDoThings
-(ido-mode 1)
-(setq ido-enable-flex-matching t)
-(setq ido-use-filename-at-point nil)
-(setq ido-auto-merge-work-directories-length -1)
-(setq ido-use-virtual-buffers t)
-(setq ido-everywhere t)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
 ;; ELisp / Scheme
@@ -172,6 +168,18 @@
   (load "haskell-mode-autoloads"))
 
 
+(use-package ido
+  :ensure t
+  :config
+  (ido-mode 1)
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-filename-at-point nil)
+  (setq ido-auto-merge-work-directories-length -1)
+  (setq ido-use-virtual-buffers t)
+  (setq ido-everywhere t)
+  (global-set-key (kbd "C-x C-b") 'ibuffer))
+
+
 (use-package paredit
   :ensure t
   :init
@@ -210,3 +218,7 @@
 
 (use-package yaml-mode
   :ensure t)
+
+
+(provide 'init)
+;;; init.el ends here
