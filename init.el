@@ -187,7 +187,10 @@
 (use-package ledger-mode
   :ensure t
   :init
-  (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
+  (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+  :config
+  (setq ledger-post-amount-alignment-column 66)
+  (setq ledger-post-use-completion-engine :ido))
 
 
 (use-package paredit
