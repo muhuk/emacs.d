@@ -23,8 +23,8 @@
 ;; Saving
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq auto-save-default nil)
-(setq recentf-save-file "~/.emacs.d/.recentf")
 (require 'recentf)
+(setq recentf-save-file "~/.emacs.d/.recentf")
 (recentf-mode 1)
 (setq recentf-max-menu-items 40)
 
@@ -76,9 +76,8 @@
 ;; Packages
 (use-package auto-complete
   :ensure t
-  :init
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
   :config
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
   (ac-config-default))
 
 
@@ -115,6 +114,17 @@
   (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
   (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
   (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
+
+
+(use-package clj-refactor
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook
+	    (lambda ()
+	      (clj-refactor-mode 1)
+	      (yas-minor-mode 1) ; for adding require/use/import statements
+	      ;; This choice of keybinding leaves cider-macroexpand-1 unbound
+	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
 
 
 (use-package clojure-mode
