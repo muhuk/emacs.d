@@ -77,6 +77,10 @@
   (ac-config-default))
 
 
+(use-package auto-complete-rst
+  :ensure t)
+
+
 (use-package ac-cider
   :ensure t
   :init
