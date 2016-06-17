@@ -65,7 +65,7 @@
 ;;   flatui-theme
 ;;   planet-theme
 ;;   twilight-bright-theme
-(use-package twilight-bright-theme
+(use-package darkburn-theme
   :ensure t)
 
 
@@ -173,7 +173,9 @@
 (use-package haskell-mode
   :ensure t
   :config
-  (load "haskell-mode-autoloads"))
+  (load "haskell-mode-autoloads")
+  :init
+  (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 
 (use-package ido
