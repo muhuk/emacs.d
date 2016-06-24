@@ -92,15 +92,6 @@
   (add-to-list 'ac-modes 'cider-repl-mode))
 
 
-(use-package ac-haskell-process
-  :ensure t
-  :config
-  (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
-  (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
-  (eval-after-load "auto-complete"
-    '(add-to-list 'ac-modes 'haskell-interactive-mode)))
-
-
 (use-package cider
   :ensure t
   :init
@@ -155,19 +146,13 @@
 
 
 (use-package flycheck-haskell
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'flycheck-mode-hook 'flycheck-haskell-setup))
 
 
 (use-package flycheck-ledger
   :ensure t)
-
-
-(use-package ghc
-  :ensure t
-  :init
-  (autoload 'ghc-init "ghc" nil t)
-  (autoload 'ghc-debug "ghc" nil t)
-  (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
 
 
 (use-package haskell-mode
@@ -188,6 +173,12 @@
   (setq ido-use-virtual-buffers t)
   (setq ido-everywhere t)
   (global-set-key (kbd "C-x C-b") 'ibuffer))
+
+
+(use-package intero
+  :ensure t
+  :init
+  (add-hook 'haskell-mode-hook 'intero-mode))
 
 
 (use-package ledger-mode
