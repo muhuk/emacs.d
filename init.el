@@ -129,6 +129,12 @@
   :ensure t)
 
 
+(use-package elm-mode
+  :ensure t
+  :init
+  (setq elm-format-on-save t))
+
+
 (use-package flycheck
   :ensure t
   :config
