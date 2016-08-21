@@ -132,7 +132,10 @@
 (use-package elm-mode
   :ensure t
   :init
-  (setq elm-format-on-save t))
+  (setq elm-format-on-save t)
+  (setq elm-sort-imports-on-save t)
+  (setq elm-tags-on-save t)
+  (setq elm-tags-exclude-elm-stuff nil))
 
 
 (use-package flycheck
@@ -145,6 +148,12 @@
   :ensure t
   :config
   (eval-after-load 'flycheck '(flycheck-clojure-setup)))
+
+
+(use-package flycheck-elm
+  :ensure t
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
 
 
 (use-package flycheck-ghcmod
