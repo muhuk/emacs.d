@@ -95,7 +95,7 @@
 (use-package cider
   :ensure t
   :init
-  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-mode-hook 'eldoc-mode)
   (setq cider-repl-pop-to-buffer-on-connect t)
   (setq cider-show-error-buffer t)
   (setq cider-auto-select-error-buffer t)
@@ -205,6 +205,11 @@
   (setq ledger-post-use-completion-engine :ido))
 
 
+(use-package org
+  :config
+  (setq org-log-done t))
+
+
 (use-package paredit
   :ensure t
   :init
@@ -239,6 +244,12 @@
    ("C-c C-c C-c" . execute-extended-command))
   :init
   (smex-initialize))
+
+
+(use-package tomatinho
+  :ensure t
+  :bind
+  (("<f12>" . tomatinho)))
 
 
 (use-package yaml-mode
