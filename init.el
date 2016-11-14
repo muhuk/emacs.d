@@ -50,9 +50,12 @@
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq-default display-time-mail-string "")
+(setq-default display-time-24hr-format t)
+(setq-default display-time-day-and-date t)
 
 
-;; ELisp / Scheme
+;; Elisp / Scheme
 ;; eldoc-mode shows documentation in the minibuffer when writing code
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
@@ -63,9 +66,8 @@
 ;;   darkburn-theme
 ;;   flatland-theme
 ;;   flatui-theme
-;;   planet-theme
 ;;   twilight-bright-theme
-(use-package darkburn-theme
+(use-package twilight-bright-theme
   :ensure t)
 
 
@@ -225,9 +227,9 @@
 
 
 (use-package powerline
-  :ensure t
-  :config
-  (display-time-mode -1))
+  :ensure t)
+;; powerline sets display-time-format, so we need to call this after use-package
+(setq-default display-time-format nil)
 
 
 (use-package rainbow-delimiters
