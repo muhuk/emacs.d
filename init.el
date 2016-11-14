@@ -207,7 +207,8 @@
 
 (use-package org
   :config
-  (setq org-log-done t))
+  (setq org-log-done t)
+  (setq org-ellipsis " ▼"))
 
 
 (use-package paredit
