@@ -209,8 +209,11 @@
 
 (use-package org
   :config
-  (setq org-log-done t)
-  (setq org-ellipsis " ▼"))
+  (setq org-log-done 'time
+        org-ellipsis " ▼"
+	org-enforce-todo-dependencies t
+	org-enforce-todo-checkbox-dependencies t)
+  (setq-default org-agenda-dim-blocked-tasks t))
 
 
 (use-package paredit
