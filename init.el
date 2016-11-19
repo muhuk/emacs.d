@@ -208,6 +208,8 @@
 
 
 (use-package org
+  :bind
+  (("C-c c" . org-capture))
   :config
   (setq org-log-done 'time
         org-ellipsis " ▼"
