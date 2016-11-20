@@ -50,6 +50,7 @@
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq-default calendar-week-start-day 1)
 (setq-default display-time-mail-string "")
 (setq-default display-time-24hr-format t)
 (setq-default display-time-day-and-date t)
