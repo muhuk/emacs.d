@@ -208,14 +208,38 @@
 
 
 (use-package org
+  :ensure t
   :bind
   (("C-c c" . org-capture))
-  :config
+  :preface
+  (defconst org-file-path "~/Documents/code/diary")
+  (defun org-file (fname)
+    "Build an absolute path for an org-file.  FNAME is the file name."
+    (format "%s/%s" org-file-path fname))
+  :init
   (setq org-log-done 'time
-        org-ellipsis " ▼"
+	org-ellipsis " ▼"
 	org-enforce-todo-dependencies t
-	org-enforce-todo-checkbox-dependencies t)
-  (setq-default org-agenda-dim-blocked-tasks t))
+	org-enforce-todo-checkbox-dependencies t
+	org-archive-location "archived.org::datetree/* Finished Tasks"
+	org-agenda-files `(,org-file-path)
+	org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
+  (setq-default org-capture-templates `(("t"
+					 "Todo"
+					 entry
+					 (file+headline ,(org-file "gtd.org") "Tasks")
+					 "* TODO %?\n- Created on %U")
+					("j"
+					 "Journal entry"
+					 entry
+					 (file+datetree ,(org-file "journal.org"))
+					 "* %?\nCreated on %T")
+					("d"
+					 "Daily review"
+					 entry
+					 (file+datetree ,(org-file "journal.org"))
+					 (file ,(org-file "templates/daily_review.txt"))))
+		org-agenda-dim-blocked-tasks t))
 
 
 (use-package paredit
