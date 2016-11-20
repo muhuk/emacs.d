@@ -259,6 +259,7 @@
 					 entry
 					 (file+datetree ,(org-file "journal.org"))
 					 (file ,(org-file "templates/daily_review.txt"))))
+		org-agenda-window-setup 'current-window
 		org-agenda-dim-blocked-tasks t))
 
 
