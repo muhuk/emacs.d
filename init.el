@@ -50,10 +50,20 @@
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq-default calendar-week-start-day 1)
-(setq-default display-time-mail-string "")
-(setq-default display-time-24hr-format t)
-(setq-default display-time-day-and-date t)
+
+
+;; Date/Time
+(setq-default calendar-week-start-day 1
+	      display-time-mail-string ""
+	      display-time-24hr-format t)
+(setq display-time-day-and-date t
+      holiday-christian-holidays nil
+      holiday-islamic-holidays nil
+      holiday-bahai-holidays nil
+      holiday-hebrew-holidays nil
+      holiday-oriental-holidays nil
+      holiday-solar-holidays nil
+      holiday-general-holidays nil)
 
 
 ;; Elisp / Scheme
