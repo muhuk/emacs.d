@@ -237,6 +237,10 @@
     "Build an absolute path for an org-file.  FNAME is the file name."
     (format "%s/%s" org-file-path fname))
   :init
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (interactive)
+	      (org-agenda nil "n")))
   (setq org-log-done 'time
 	org-ellipsis " ▼"
 	org-enforce-todo-dependencies t
