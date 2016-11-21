@@ -264,7 +264,9 @@
 					 (file+datetree ,(org-file "journal.org"))
 					 (file ,(org-file "templates/daily_review.txt"))))
 		org-agenda-window-setup 'current-window
-		org-agenda-dim-blocked-tasks t))
+		org-agenda-dim-blocked-tasks t
+		org-agenda-skip-deadline-if-done t
+		org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled))
 
 
 (use-package paredit
