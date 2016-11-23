@@ -78,7 +78,7 @@
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package twilight-bright-theme
+(use-package flatland-theme
   :ensure t)
 
 
@@ -252,17 +252,22 @@
 					 "Todo"
 					 entry
 					 (file+headline ,(org-file "gtd.org") "Tasks")
-					 "* TODO %?\n- Created on %U")
+					 (file ,(org-file "templates/todo.txt")))
 					("j"
 					 "Journal entry"
 					 entry
 					 (file+datetree ,(org-file "journal.org"))
-					 "* %?\nCreated on %T")
+					 (file ,(org-file "templates/journal.txt")))
 					("d"
 					 "Daily review"
 					 entry
 					 (file+datetree ,(org-file "journal.org"))
-					 (file ,(org-file "templates/daily_review.txt"))))
+					 (file ,(org-file "templates/daily_review.txt")))
+					("w"
+					 "Weekly review"
+					 entry
+					 (file+datetree ,(org-file "journal.org"))
+					 (file ,(org-file "templates/weekly_review.txt"))))
 		org-agenda-window-setup 'current-window
 		org-agenda-dim-blocked-tasks t
 		org-agenda-skip-deadline-if-done t
@@ -280,12 +285,6 @@
   (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
   (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
   (add-hook 'cider-repl-mode-hook 'paredit-mode))
-
-
-(use-package powerline
-  :ensure t)
-;; powerline sets display-time-format, so we need to call this after use-package
-(setq-default display-time-format nil)
 
 
 (use-package rainbow-delimiters
