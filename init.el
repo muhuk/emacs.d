@@ -253,7 +253,8 @@
 	org-enforce-todo-dependencies t
 	org-enforce-todo-checkbox-dependencies t
 	org-archive-location "archived.org::datetree/* Finished Tasks"
-	org-agenda-files `(,org-file-path)
+	org-agenda-files `(,(org-file "gtd.org")
+			   ,(org-file "journal.org"))
 	org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
