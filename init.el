@@ -242,6 +242,12 @@
 	    (lambda ()
 	      (interactive)
 	      (org-agenda nil "n")))
+  ;; http://orgmode.org/worg/org-hacks.html
+  (defadvice org-archive-subtree (before
+				  add-inherited-tags-before-org-archive-subtree
+				  activate)
+    "add inherited tags before org-archive-subtree"
+    (org-set-tags-to (org-get-tags-at)))
   (setq org-log-done 'time
 	org-ellipsis " ▼"
 	org-enforce-todo-dependencies t
