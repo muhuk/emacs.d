@@ -266,6 +266,11 @@
 					 entry
 					 (file+datetree ,(org-file "journal.org"))
 					 (file ,(org-file "templates/journal.txt")))
+					("s"
+					 "Someday"
+					 entry
+					 (file+olp ,(org-file "someday.org") "Backlog" "Other")
+					 (file ,(org-file "templates/someday.txt")))
 					("d"
 					 "Daily review"
 					 entry
