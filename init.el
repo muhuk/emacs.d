@@ -79,7 +79,7 @@
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package flatland-theme
+(use-package twilight-bright-theme
   :ensure t)
 
 
@@ -218,7 +218,15 @@
   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
   :config
   (setq ledger-post-amount-alignment-column 66)
-  (setq ledger-post-use-completion-engine :ido))
+  (setq ledger-post-use-completion-engine :ido)
+  (setq ledger-reports
+	'(("monthly-expenses" "ledger --monthly --empty --collapse -f %(ledger-file) reg ^expenses")
+	  ("details" "ledger -f %(ledger-file) -s --current --no-color --no-total bal")
+	  ("overview" "ledger -f %(ledger-file) -s --current --real --no-color bal Assets or Liabilities")
+	  ("bal" "ledger -f %(ledger-file) bal")
+	  ("reg" "ledger -f %(ledger-file) reg")
+	  ("payee" "ledger -f %(ledger-file) reg @%(payee)")
+	  ("account" "ledger -f %(ledger-file) reg %(account)"))))
 
 
 (use-package markdown-mode
@@ -235,7 +243,7 @@
   :bind
   (("C-c c" . org-capture))
   :preface
-  (defconst org-file-path "~/Documents/code/diary")
+  (defconst org-file-path "~/Documents/diary")
   (defun org-file (fname)
     "Build an absolute path for an org-file.  FNAME is the file name."
     (format "%s/%s" org-file-path fname))
@@ -255,7 +263,8 @@
 	org-enforce-todo-dependencies t
 	org-enforce-todo-checkbox-dependencies t
 	org-archive-location "archived.org::datetree/* Finished Tasks"
-	org-agenda-files `(,(org-file "gtd.org")
+	org-agenda-files `(,(org-file "calendar.org")
+			   ,(org-file "gtd.org")
 			   ,(org-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
 			     (,(org-file "someday.org") . (:maxlevel . 3))))
