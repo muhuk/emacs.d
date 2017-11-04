@@ -106,6 +106,10 @@
   (add-to-list 'ac-modes 'cider-repl-mode))
 
 
+(use-package cargo
+  :ensure t)
+
+
 (use-package cider
   :ensure t
   :init
@@ -183,6 +187,10 @@
 
 
 (use-package flycheck-ledger
+  :ensure t)
+
+
+(use-package flycheck-rust
   :ensure t)
 
 
@@ -317,6 +325,14 @@
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+
+(use-package rust-mode
+  :ensure t
+  :init
+  (add-hook 'rust-mode-hook #'flycheck-rust-setup)
+  :config
+  (setq rust-format-on-save t))
 
 
 (use-package smex
