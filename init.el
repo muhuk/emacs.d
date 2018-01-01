@@ -26,6 +26,12 @@
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
 
+;; Custom
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+
 ;; Saving
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq auto-save-default nil)
