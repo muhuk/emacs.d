@@ -260,6 +260,7 @@
 	    (lambda ()
 	      (interactive)
 	      (org-agenda nil "n")))
+  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
   ;; http://orgmode.org/worg/org-hacks.html
   (defadvice org-archive-subtree (before
 				  add-inherited-tags-before-org-archive-subtree
