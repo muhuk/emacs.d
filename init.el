@@ -29,7 +29,8 @@
 ;; Custom
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
 (setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(when (file-exists-p custom-file)
+  (load-file custom-file))
 
 
 ;; Saving
