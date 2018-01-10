@@ -86,7 +86,7 @@
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package twilight-bright-theme
+(use-package darkburn-theme
   :ensure t)
 
 
