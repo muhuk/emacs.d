@@ -60,6 +60,9 @@
 (setq column-number-mode t)
 
 
+;; Formatting
+(setq-default fill-column 78)
+
 ;; Date/Time
 (setq-default calendar-week-start-day 1
 	      display-time-mail-string ""
