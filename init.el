@@ -12,7 +12,9 @@
 (add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "http://melpa.org/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -89,7 +91,7 @@
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package darkburn-theme
+(use-package flatland-theme
   :ensure t)
 
 
@@ -105,56 +107,56 @@
   :ensure t)
 
 
-;; (use-package ac-cider
-;;   :ensure t
-;;   :init
-;;   (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-;;   (add-hook 'cider-mode-hook 'ac-cider-setup)
-;;   (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-;;   :config
-;;   (add-to-list 'ac-modes 'cider-mode)
-;;   (add-to-list 'ac-modes 'cider-repl-mode))
+(use-package ac-cider
+  :ensure t
+  :init
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  :config
+  (add-to-list 'ac-modes 'cider-mode)
+  (add-to-list 'ac-modes 'cider-repl-mode))
 
 
 (use-package cargo
   :ensure t)
 
 
-;; (use-package cider
-;;   :ensure t
-;;   :init
-;;   (add-hook 'cider-mode-hook 'eldoc-mode)
-;;   (setq cider-repl-pop-to-buffer-on-connect t)
-;;   (setq cider-show-error-buffer t)
-;;   (setq cider-auto-select-error-buffer t)
-;;   (setq cider-repl-history-file "~/.emacs.d/cider-history")
-;;   (setq cider-repl-wrap-history t)
-;;   (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
-;;   (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
+(use-package cider
+  :ensure t
+  :init
+  (add-hook 'cider-mode-hook 'eldoc-mode)
+  (setq cider-repl-pop-to-buffer-on-connect t)
+  (setq cider-show-error-buffer t)
+  (setq cider-auto-select-error-buffer t)
+  (setq cider-repl-history-file "~/.emacs.d/cider-history")
+  (setq cider-repl-wrap-history t)
+  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
 
 
-;; (use-package clj-refactor
-;;   :ensure t
-;;   :init
-;;   (add-hook 'clojure-mode-hook
-;; 	    (lambda ()
-;; 	      (clj-refactor-mode 1)
-;; 	      (yas-minor-mode 1) ; for adding require/use/import statements
-;; 	      ;; This choice of keybinding leaves cider-macroexpand-1 unbound
-;; 	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
+(use-package clj-refactor
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook
+	    (lambda ()
+	      (clj-refactor-mode 1)
+	      (yas-minor-mode 1) ; for adding require/use/import statements
+	      ;; This choice of keybinding leaves cider-macroexpand-1 unbound
+	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
 
 
-;; (use-package clojure-mode
-;;   :ensure t
-;;   :init
-;;   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
-;;   (add-hook 'clojure-mode-hook 'subword-mode))
+(use-package clojure-mode
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'subword-mode))
 
 
-;; (use-package clojure-mode-extra-font-locking
-;;   :ensure t)
+(use-package clojure-mode-extra-font-locking
+  :ensure t)
 
 
 (use-package elm-mode
