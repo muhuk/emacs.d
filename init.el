@@ -12,7 +12,7 @@
 (add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
@@ -107,15 +107,15 @@
   :ensure t)
 
 
-(use-package ac-cider
-  :ensure t
-  :init
-  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-  (add-hook 'cider-mode-hook 'ac-cider-setup)
-  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-  :config
-  (add-to-list 'ac-modes 'cider-mode)
-  (add-to-list 'ac-modes 'cider-repl-mode))
+;; (use-package ac-cider
+;;   :ensure t
+;;   :init
+;;   (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+;;   (add-hook 'cider-mode-hook 'ac-cider-setup)
+;;   (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+;;   :config
+;;   (add-to-list 'ac-modes 'cider-mode)
+;;   (add-to-list 'ac-modes 'cider-repl-mode))
 
 
 (use-package cargo
