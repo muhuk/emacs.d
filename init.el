@@ -214,6 +214,10 @@
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 
+(use-package htmlize
+  :ensure t)
+
+
 (use-package ido
   :ensure t
   :config
@@ -318,7 +322,8 @@
 		org-agenda-dim-blocked-tasks t
 		org-agenda-skip-deadline-if-done t
 		org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled
-		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")))
+		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
+		org-src-fontify-natively t))
 
 
 ;; (use-package paredit
