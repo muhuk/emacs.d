@@ -323,7 +323,8 @@
 		org-agenda-skip-deadline-if-done t
 		org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled
 		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
-		org-src-fontify-natively t))
+		org-src-fontify-natively t
+		org-html-htmlize-output-type 'css))
 
 
 ;; (use-package paredit
