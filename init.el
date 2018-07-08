@@ -340,6 +340,12 @@
 ;;   (add-hook 'cider-repl-mode-hook 'paredit-mode))
 
 
+(use-package plantuml-mode
+  :ensure t
+  :init
+  (setq plantuml-jar-path "~/bin/plantuml.jar"))
+
+
 (use-package rainbow-delimiters
   :ensure t
   :init
