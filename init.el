@@ -8,11 +8,9 @@
 ;; default: ("gnu" . "http://elpa.gnu.org/packages/")
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "https://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+	     '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
@@ -242,7 +240,7 @@
   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
   :config
   (setq ledger-post-amount-alignment-column 66)
-  (setq ledger-post-use-completion-engine :ido)
+  (setq-default ledger-post-use-completion-engine :ido)
   (setq ledger-reports
 	'(("monthly-expenses" "ledger --monthly --empty --collapse -f %(ledger-file) reg ^expenses")
 	  ("details" "ledger -f %(ledger-file) -s --current --no-color --no-total bal")
