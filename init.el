@@ -61,6 +61,7 @@
 
 
 ;; Formatting
+(setq-default indent-tabs-mode nil)
 (setq-default fill-column 78)
 
 ;; Date/Time
@@ -171,7 +172,8 @@
   :commands flycheck-mode
   :config
   (global-flycheck-mode)
-  (setq flycheck-emacs-lisp-load-path 'inherit))
+  (setq flycheck-emacs-lisp-load-path 'inherit)
+  (setq flycheck-global-modes '(not org-mode)))
 
 
 ;; (use-package flycheck-clojure
