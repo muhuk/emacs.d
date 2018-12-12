@@ -87,10 +87,11 @@
 
 ;; Themes
 ;;   darkburn-theme
+;;   dracula-theme
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package flatland-theme
+(use-package dracula-theme
   :ensure t)
 
 
