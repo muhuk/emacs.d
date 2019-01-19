@@ -284,10 +284,7 @@
   (add-hook 'emacs-startup-hook
 	    (lambda ()
 	      (interactive)
-	      (org-agenda nil "a")
-              (execute-kbd-macro (kbd "A T ACTIVE"))
-              (execute-kbd-macro (kbd "A T TODO"))
-              (call-interactively 'beginning-of-buffer)))
+	      (org-agenda nil "A")))
   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
   ;; http://orgmode.org/worg/org-hacks.html
   (defadvice org-archive-subtree (before
@@ -334,6 +331,10 @@
 		org-agenda-dim-blocked-tasks t
 		org-agenda-skip-deadline-if-done t
 		org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled
+                org-agenda-custom-commands '(("A" "Customised agenda"
+                                              ((agenda "" ((org-agenda-span 1)))
+                                               (todo "ACTIVE")
+                                               (todo "TODO"))))
 		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
 		org-src-fontify-natively t
 		org-html-htmlize-output-type 'css))
