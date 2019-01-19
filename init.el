@@ -284,7 +284,10 @@
   (add-hook 'emacs-startup-hook
 	    (lambda ()
 	      (interactive)
-	      (org-agenda nil "n")))
+	      (org-agenda nil "a")
+              (execute-kbd-macro (kbd "A T ACTIVE"))
+              (execute-kbd-macro (kbd "A T TODO"))
+              (call-interactively 'beginning-of-buffer)))
   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
   ;; http://orgmode.org/worg/org-hacks.html
   (defadvice org-archive-subtree (before
