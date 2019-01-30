@@ -52,7 +52,7 @@
 (show-paren-mode 1)
 (global-linum-mode 1)
 (global-hl-line-mode 1)
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 120)
 (blink-cursor-mode 0)
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
