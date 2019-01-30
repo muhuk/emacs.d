@@ -168,6 +168,11 @@
   (setq elm-tags-exclude-elm-stuff nil))
 
 
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
+
+
 (use-package flycheck
   :ensure t
   :commands flycheck-mode
