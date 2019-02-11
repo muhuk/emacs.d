@@ -301,7 +301,9 @@
 			   ,(org-file "gtd.org")
 			   ,(org-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-			     (,(org-file "someday.org") . (:maxlevel . 3))))
+			     (,(org-file "someday.org") . (:maxlevel . 3)))
+        org-babel-load-languages `((clojure . t)
+                                   (emacs-lisp . t)))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
 					 entry
