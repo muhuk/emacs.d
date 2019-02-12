@@ -107,55 +107,7 @@
   :ensure t)
 
 
-;; (use-package ac-cider
-;;   :ensure t
-;;   :init
-;;   (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-;;   (add-hook 'cider-mode-hook 'ac-cider-setup)
-;;   (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-;;   :config
-;;   (add-to-list 'ac-modes 'cider-mode)
-;;   (add-to-list 'ac-modes 'cider-repl-mode))
-
-
 (use-package cargo
-  :ensure t)
-
-
-(use-package cider
-  :ensure t
-  :init
-  (add-hook 'cider-mode-hook 'eldoc-mode)
-  (setq cider-repl-pop-to-buffer-on-connect t)
-  (setq cider-show-error-buffer t)
-  (setq cider-auto-select-error-buffer t)
-  (setq cider-repl-history-file "~/.emacs.d/cider-history")
-  (setq cider-repl-wrap-history t)
-  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
-
-
-(use-package clj-refactor
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook
-	    (lambda ()
-	      (clj-refactor-mode 1)
-	      (yas-minor-mode 1) ; for adding require/use/import statements
-	      ;; This choice of keybinding leaves cider-macroexpand-1 unbound
-	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
-
-
-(use-package clojure-mode
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook 'subword-mode))
-
-
-(use-package clojure-mode-extra-font-locking
   :ensure t)
 
 
@@ -175,12 +127,6 @@
   (global-flycheck-mode)
   (setq flycheck-emacs-lisp-load-path 'inherit)
   (setq flycheck-global-modes '(not org-mode)))
-
-
-(use-package flycheck-clojure
-  :ensure t
-  :config
-  (eval-after-load 'flycheck '(flycheck-clojure-setup)))
 
 
 (use-package flycheck-elm
@@ -302,8 +248,7 @@
 			   ,(org-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
 			     (,(org-file "someday.org") . (:maxlevel . 3)))
-        org-babel-load-languages `((clojure . t)
-                                   (emacs-lisp . t)))
+        org-babel-load-languages `((emacs-lisp . t)))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
 					 entry
@@ -337,23 +282,9 @@
                                               ((agenda "" ((org-agenda-span 1)))
                                                (todo "ACTIVE")
                                                (todo "TODO"))))
-                org-babel-clojure-backend 'cider
 		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
 		org-src-fontify-natively t
 		org-html-htmlize-output-type 'css))
-
-
-(use-package paredit
-  :ensure t
-  :init
-  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-  (add-hook 'cider-repl-mode-hook 'paredit-mode))
 
 
 (use-package plantuml-mode
