@@ -95,20 +95,11 @@
   :ensure t)
 
 
-;; Packages
-(use-package auto-complete
-  :ensure t
-  :config
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-  (ac-config-default))
-
-
-(use-package auto-complete-rst
-  :ensure t)
-
-
 (use-package cargo
-  :ensure t)
+  :ensure t
+  :init
+  (setq-default cider-repl-history-file "~/.emacs.d/cider-history"
+                cider-repl-wrap-history t))
 
 
 (use-package cider
