@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "flycheck-ghcmod" "20150114.632" "A flycheck checker for Haskell using ghcmod" '((flycheck "0.21snapshot1") (dash "2.0")) :commit "6bb7b7d879f05bbae54e99eb04806c877adf3ccc" :keywords '("convenience" "languages" "tools") :authors '(("Shen Chao" . "scturtle@gmail.com")) :maintainer '("Shen Chao" . "scturtle@gmail.com") :url "https://github.com/scturtle/flycheck-ghcmod")

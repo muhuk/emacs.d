@@ -1,11 +1,12 @@
 .#*
 .recentf
+*.*~
+*.elc
 ac-comphist.dat
 auto-save-list
 backups
 bookmarks
 cider-history
 custom.el
-elpa
 ido.last
 smex-items

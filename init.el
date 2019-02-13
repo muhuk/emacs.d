@@ -111,6 +111,12 @@
   :ensure t)
 
 
+(use-package cider
+  :ensure t
+  :config
+  (setq-default org-babel-clojure-backend 'cider))
+
+
 (use-package elm-mode
   :ensure t
   :init
