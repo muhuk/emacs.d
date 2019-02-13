@@ -108,6 +108,17 @@
   (setq-default org-babel-clojure-backend 'cider))
 
 
+(use-package company
+  :ensure t
+  :defer t
+  :init
+  (setq company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t)
+  :config
+  (global-company-mode))
+
+
 (use-package elm-mode
   :ensure t
   :init
