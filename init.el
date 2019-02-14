@@ -108,6 +108,18 @@
   (setq-default org-babel-clojure-backend 'cider))
 
 
+(use-package clj-refactor
+  :ensure t
+  :init
+  (setq-default cljr-inject-dependencies-at-jack-in nil)
+  (add-hook 'clojure-mode-hook
+	    (lambda ()
+	      (clj-refactor-mode 1)
+	      (yas-minor-mode 1) ; for adding require/use/import statements
+	      ;; This choice of keybinding leaves cider-macroexpand-1 unbound
+	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
+
+
 (use-package clojure-mode
   :ensure t
   :init
@@ -272,8 +284,7 @@
 			   ,(org-file "gtd.org")
 			   ,(org-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-			     (,(org-file "someday.org") . (:maxlevel . 3)))
-        org-babel-load-languages `((emacs-lisp . t)))
+			     (,(org-file "someday.org") . (:maxlevel . 3))))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
 					 entry
