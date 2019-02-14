@@ -268,7 +268,9 @@
 	    (lambda ()
 	      (interactive)
 	      (org-agenda nil "A")))
-  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
+  (add-hook 'org-mode-hook (lambda ()
+                             (auto-revert-mode 1)
+                             (require 'ob-clojure)))
   ;; http://orgmode.org/worg/org-hacks.html
   (defadvice org-archive-subtree (before
 				  add-inherited-tags-before-org-archive-subtree
@@ -284,7 +286,9 @@
 			   ,(org-file "gtd.org")
 			   ,(org-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-			     (,(org-file "someday.org") . (:maxlevel . 3))))
+			     (,(org-file "someday.org") . (:maxlevel . 3)))
+        org-babel-load-languages '((emacs-lisp . t)
+                                   (clojure . t)))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
 					 entry
