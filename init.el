@@ -108,6 +108,13 @@
   (setq-default org-babel-clojure-backend 'cider))
 
 
+(use-package clojure-mode
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook #'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook #'subword-mode))
+
+
 (use-package clojure-mode-extra-font-locking
   :ensure t)
 
@@ -303,6 +310,20 @@
 		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
 		org-src-fontify-natively t
 		org-html-htmlize-output-type 'css))
+
+
+(use-package paredit
+  :ensure t
+  :init
+  (autoload 'enable-paredit-mode "paredit"
+    "Turn on pseudo-structural editing of Lisp code." t)
+  (add-hook 'emacs-lisp-mode-hook        #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook              #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook              #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook  #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook            #'enable-paredit-mode)
+  (add-hook 'cider-repl-mode-hook        #'paredit-mode))
 
 
 (use-package plantuml-mode
