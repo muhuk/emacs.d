@@ -105,7 +105,8 @@
 (use-package cider
   :ensure t
   :config
-  (setq-default org-babel-clojure-backend 'cider))
+  (setq-default org-babel-clojure-backend 'cider
+                org-babel-clojure-sync-nrepl-timeout 5000))
 
 
 (use-package clj-refactor
