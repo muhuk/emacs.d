@@ -272,6 +272,7 @@
   (add-hook 'org-mode-hook (lambda ()
                              (auto-revert-mode 1)
                              (require 'ob-clojure)))
+  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   ;; http://orgmode.org/worg/org-hacks.html
   (defadvice org-archive-subtree (before
 				  add-inherited-tags-before-org-archive-subtree
