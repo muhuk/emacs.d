@@ -143,6 +143,12 @@
   (global-company-mode))
 
 
+(use-package default-text-scale
+  :ensure t
+  :config
+  (default-text-scale-mode))
+
+
 (use-package elm-mode
   :ensure t
   :init
