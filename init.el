@@ -277,10 +277,10 @@
   :bind
   (("C-c c" . org-capture))
   :preface
-  (defconst org-file-path "~/Documents/diary")
-  (defun org-file (fname)
+  (defconst diary-path "~/Documents/diary")
+  (defun diary-file (fname)
     "Build an absolute path for an org-file.  FNAME is the file name."
-    (format "%s/%s" org-file-path fname))
+    (format "%s/%s" diary-path fname))
   :init
   (add-hook 'emacs-startup-hook
 	    (lambda ()
@@ -301,38 +301,38 @@
 	org-enforce-todo-dependencies t
 	org-enforce-todo-checkbox-dependencies t
 	org-archive-location "archived.org::datetree/* Finished Tasks"
-	org-agenda-files `(,(org-file "calendar.org")
-			   ,(org-file "gtd.org")
-			   ,(org-file "journal.org"))
+	org-agenda-files `(,(diary-file "calendar.org")
+			   ,(diary-file "gtd.org")
+			   ,(diary-file "journal.org"))
 	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-			     (,(org-file "someday.org") . (:maxlevel . 3)))
+			     (,(diary-file "someday.org") . (:maxlevel . 3)))
         org-babel-load-languages '((emacs-lisp . t)
                                    (clojure . t)))
   (setq-default org-capture-templates `(("t"
 					 "Todo"
 					 entry
-					 (file+headline ,(org-file "gtd.org") "Tasks")
-					 (file ,(org-file "templates/todo.txt")))
+					 (file+headline ,(diary-file "gtd.org") "Tasks")
+					 (file ,(diary-file "templates/todo.txt")))
 					("j"
 					 "Journal entry"
 					 entry
-					 (file+datetree ,(org-file "journal.org"))
-					 (file ,(org-file "templates/journal.txt")))
+					 (file+datetree ,(diary-file "journal.org"))
+					 (file ,(diary-file "templates/journal.txt")))
 					("s"
 					 "Someday"
 					 entry
-					 (file+olp ,(org-file "someday.org") "Backlog" "Other")
-					 (file ,(org-file "templates/someday.txt")))
+					 (file+olp ,(diary-file "someday.org") "Backlog" "Other")
+					 (file ,(diary-file "templates/someday.txt")))
 					("d"
 					 "Daily review"
 					 entry
-					 (file+datetree ,(org-file "journal.org"))
-					 (file ,(org-file "templates/daily_review.txt")))
+					 (file+datetree ,(diary-file "journal.org"))
+					 (file ,(diary-file "templates/daily_review.txt")))
 					("w"
 					 "Weekly review"
 					 entry
-					 (file+datetree ,(org-file "journal.org"))
-					 (file ,(org-file "templates/weekly_review.txt"))))
+					 (file+datetree ,(diary-file "journal.org"))
+					 (file ,(diary-file "templates/weekly_review.txt"))))
 		org-agenda-window-setup 'current-window
 		org-agenda-dim-blocked-tasks t
 		org-agenda-skip-deadline-if-done t
