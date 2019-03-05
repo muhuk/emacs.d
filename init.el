@@ -281,69 +281,71 @@
   (defun diary-file (fname)
     "Build an absolute path for an org-file.  FNAME is the file name."
     (format "%s/%s" diary-path fname))
+  (setq diary-enabled (file-exists-p diary-path))
   :init
-  (add-hook 'emacs-startup-hook
-	    (lambda ()
-	      (interactive)
-	      (org-agenda nil "A")))
-  (add-hook 'org-mode-hook (lambda ()
-                             (auto-revert-mode 1)
-                             (require 'ob-clojure)))
   (add-hook 'org-mode-hook #'turn-on-visual-line-mode)
-  ;; http://orgmode.org/worg/org-hacks.html
-  (defadvice org-archive-subtree (before
-				  add-inherited-tags-before-org-archive-subtree
-				  activate)
-    "add inherited tags before org-archive-subtree"
-    (org-set-tags-to (org-get-tags-at)))
-  (setq org-log-done 'time
-	org-ellipsis " ▼"
-	org-enforce-todo-dependencies t
-	org-enforce-todo-checkbox-dependencies t
-	org-archive-location "archived.org::datetree/* Finished Tasks"
-	org-agenda-files `(,(diary-file "calendar.org")
-			   ,(diary-file "gtd.org")
-			   ,(diary-file "journal.org"))
-	org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-			     (,(diary-file "someday.org") . (:maxlevel . 3)))
-        org-babel-load-languages '((emacs-lisp . t)
-                                   (clojure . t)))
-  (setq-default org-capture-templates `(("t"
-					 "Todo"
-					 entry
-					 (file+headline ,(diary-file "gtd.org") "Tasks")
-					 (file ,(diary-file "templates/todo.txt")))
-					("j"
-					 "Journal entry"
-					 entry
-					 (file+datetree ,(diary-file "journal.org"))
-					 (file ,(diary-file "templates/journal.txt")))
-					("s"
-					 "Someday"
-					 entry
-					 (file+olp ,(diary-file "someday.org") "Backlog" "Other")
-					 (file ,(diary-file "templates/someday.txt")))
-					("d"
-					 "Daily review"
-					 entry
-					 (file+datetree ,(diary-file "journal.org"))
-					 (file ,(diary-file "templates/daily_review.txt")))
-					("w"
-					 "Weekly review"
-					 entry
-					 (file+datetree ,(diary-file "journal.org"))
-					 (file ,(diary-file "templates/weekly_review.txt"))))
-		org-agenda-window-setup 'current-window
-		org-agenda-dim-blocked-tasks t
-		org-agenda-skip-deadline-if-done t
-		org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled
-                org-agenda-custom-commands '(("A" "Customised agenda"
-                                              ((agenda "" ((org-agenda-span 1)))
-                                               (todo "ACTIVE")
-                                               (todo "TODO"))))
-		org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
-		org-src-fontify-natively t
-		org-html-htmlize-output-type 'css))
+  (when diary-enabled
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                (interactive)
+                (org-agenda nil "A")))
+    (add-hook 'org-mode-hook (lambda ()
+                               (auto-revert-mode 1)
+                               (require 'ob-clojure)))
+    ;; http://orgmode.org/worg/org-hacks.html
+    (defadvice org-archive-subtree (before
+                                    add-inherited-tags-before-org-archive-subtree
+                                    activate)
+      "add inherited tags before org-archive-subtree"
+      (org-set-tags-to (org-get-tags-at)))
+    (setq org-log-done 'time
+          org-ellipsis " ▼"
+          org-enforce-todo-dependencies t
+          org-enforce-todo-checkbox-dependencies t
+          org-archive-location "archived.org::datetree/* Finished Tasks"
+          org-agenda-files `(,(diary-file "calendar.org")
+                             ,(diary-file "gtd.org")
+                             ,(diary-file "journal.org"))
+          org-refile-targets `((org-agenda-files . (:maxlevel . 3))
+                               (,(diary-file "someday.org") . (:maxlevel . 3)))
+          org-babel-load-languages '((emacs-lisp . t)
+                                     (clojure . t)))
+    (setq-default org-capture-templates `(("t"
+                                           "Todo"
+                                           entry
+                                           (file+headline ,(diary-file "gtd.org") "Tasks")
+                                           (file ,(diary-file "templates/todo.txt")))
+                                          ("j"
+                                           "Journal entry"
+                                           entry
+                                           (file+datetree ,(diary-file "journal.org"))
+                                           (file ,(diary-file "templates/journal.txt")))
+                                          ("s"
+                                           "Someday"
+                                           entry
+                                           (file+olp ,(diary-file "someday.org") "Backlog" "Other")
+                                           (file ,(diary-file "templates/someday.txt")))
+                                          ("d"
+                                           "Daily review"
+                                           entry
+                                           (file+datetree ,(diary-file "journal.org"))
+                                           (file ,(diary-file "templates/daily_review.txt")))
+                                          ("w"
+                                           "Weekly review"
+                                           entry
+                                           (file+datetree ,(diary-file "journal.org"))
+                                           (file ,(diary-file "templates/weekly_review.txt"))))
+                  org-agenda-window-setup 'current-window
+                  org-agenda-dim-blocked-tasks t
+                  org-agenda-skip-deadline-if-done t
+                  org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled
+                  org-agenda-custom-commands '(("A" "Customised agenda"
+                                                ((agenda "" ((org-agenda-span 1)))
+                                                 (todo "ACTIVE")
+                                                 (todo "TODO"))))
+                  org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
+                  org-src-fontify-natively t
+                  org-html-htmlize-output-type 'css)))
 
 
 (use-package paredit
