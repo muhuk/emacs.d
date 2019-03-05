@@ -32,7 +32,6 @@
 (when (file-exists-p custom-file)
   (load-file custom-file))
 
-
 ;; Saving
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq auto-save-default nil)
@@ -40,7 +39,6 @@
 (setq recentf-save-file "~/.emacs.d/.recentf")
 (recentf-mode 1)
 (setq recentf-max-menu-items 40)
-
 
 ;; UI tweaks
 (setq inhibit-startup-message t
@@ -59,6 +57,13 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq column-number-mode t)
 
+;; Keyboard
+;;
+;; Bind Home & End keys only on MacOS.  This would work when using a
+;; standard keyboard.
+(when (string= system-type "darwin")
+  (global-set-key (kbd "<home>") 'beginning-of-line)
+  (global-set-key (kbd "<end>") 'end-of-line))
 
 ;; Formatting
 (setq-default indent-tabs-mode nil)
