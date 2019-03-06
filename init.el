@@ -154,6 +154,10 @@
   (default-text-scale-mode))
 
 
+(use-package edit-indirect
+  :ensure t)
+
+
 (use-package elm-mode
   :ensure t
   :init
