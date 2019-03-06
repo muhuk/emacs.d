@@ -386,6 +386,10 @@
   (setq rust-format-on-save t))
 
 
+(use-package seq
+  :ensure t)
+
+
 (use-package smex
   :ensure t
   :bind
