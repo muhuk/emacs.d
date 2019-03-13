@@ -26,11 +26,14 @@
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
 
-;; Custom
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-  (load-file custom-file))
+;; Character Encoding
+(set-language-environment 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 
 ;; Saving
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
@@ -39,6 +42,7 @@
 (setq recentf-save-file "~/.emacs.d/.recentf")
 (recentf-mode 1)
 (setq recentf-max-menu-items 40)
+
 
 ;; UI tweaks
 (setq inhibit-startup-message t
@@ -65,9 +69,11 @@
   (global-set-key (kbd "<home>") 'beginning-of-line)
   (global-set-key (kbd "<end>") 'end-of-line))
 
+
 ;; Formatting
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 78)
+
 
 ;; Date/Time
 (setq-default calendar-week-start-day 1
@@ -88,6 +94,13 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+
+;; Custom
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load-file custom-file))
 
 
 ;; Themes
