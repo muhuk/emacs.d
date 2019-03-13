@@ -283,10 +283,21 @@
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+  :mode
+  (("README\\.md\\'" . gfm-mode)
+   ("\\.md\\'" . markdown-mode)
+   ("\\.markdown\\'" . markdown-mode))
+  :init
+  (let ((github-markdown-css
+         (with-temp-buffer
+           ;; See https://github.com/sindresorhus/github-markdown-css
+           (insert-file-contents "~/.emacs.d/vendor/markdown/github-markdown.css")
+           (buffer-string))))
+    (setq markdown-command "pandoc")
+    (setq markdown-xhtml-header-content
+          (concat "<style>" github-markdown-css "</style>"))
+    (setq markdown-xhtml-body-preamble "<div class=\"markdown-body\">")
+    (setq markdown-xhtml-body-epilogue "</div>")))
 
 
 (use-package org
