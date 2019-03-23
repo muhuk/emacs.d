@@ -110,7 +110,7 @@
 ;;   flatland-theme
 ;;   flatui-theme
 ;;   twilight-bright-theme
-(use-package dracula-theme
+(use-package flatui-theme
   :ensure t
   :config
   (set-face-attribute 'linum nil :height 100))
