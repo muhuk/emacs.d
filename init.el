@@ -61,6 +61,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq column-number-mode t)
 
+
 ;; Keyboard
 ;;
 ;; Bind Home & End keys only on MacOS.  This would work when using a
@@ -110,7 +111,10 @@
 ;;   flatui-theme
 ;;   twilight-bright-theme
 (use-package dracula-theme
-  :ensure t)
+  :ensure t
+  :config
+  (set-face-attribute 'linum nil :height 100))
+
 
 
 (use-package cargo
