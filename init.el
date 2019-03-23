@@ -335,9 +335,7 @@
                              ,(diary-file "gtd.org")
                              ,(diary-file "journal.org"))
           org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-                               (,(diary-file "someday.org") . (:maxlevel . 3)))
-          org-babel-load-languages '((emacs-lisp . t)
-                                     (clojure . t)))
+                               (,(diary-file "someday.org") . (:maxlevel . 3))))
     (setq-default org-capture-templates `(("t"
                                            "Todo"
                                            entry
@@ -373,7 +371,12 @@
                                                  (todo "TODO"))))
                   org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
                   org-src-fontify-natively t
-                  org-html-htmlize-output-type 'css)))
+                  org-html-htmlize-output-type 'css))
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((clojure . t)
+                                 (emacs-lisp . t)
+                                 (shell . t))))
 
 
 (use-package paredit
