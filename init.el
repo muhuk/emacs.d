@@ -105,16 +105,12 @@
 
 
 ;; Themes
-;;   darkburn-theme
 ;;   dracula-theme
 ;;   flatland-theme
-;;   flatui-theme
-;;   twilight-bright-theme
-(use-package flatui-theme
+(use-package dracula-theme
   :ensure t
   :config
   (set-face-attribute 'linum nil :height 100))
-
 
 
 (use-package cargo
