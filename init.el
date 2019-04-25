@@ -228,6 +228,12 @@
   :ensure t)
 
 
+(use-package golden-ratio-scroll-screen
+  :ensure t
+  :config
+  (global-set-key [remap scroll-down-command] 'golden-ratio-scroll-screen-down)
+  (global-set-key [remap scroll-up-command] 'golden-ratio-scroll-screen-up))
+
 (use-package haskell-mode
   :ensure t
   :config
