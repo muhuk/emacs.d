@@ -66,6 +66,7 @@
 ;;
 ;; Disable CMD-z minimizing Emacs:
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
 
 ;; Bind Home & End keys only on MacOS.  This would work when using a
 ;; standard keyboard.
