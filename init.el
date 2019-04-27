@@ -107,6 +107,9 @@
   (load-file custom-file))
 
 
+;; IBuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; Themes
 ;;   dracula-theme
 ;;   flatland-theme
@@ -246,6 +249,15 @@
   :ensure t)
 
 
+(use-package ibuffer-vc
+  :ensure t
+  :config
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
+
 (use-package ido
   :ensure t
   :config
@@ -254,8 +266,7 @@
   (setq ido-use-filename-at-point nil)
   (setq ido-auto-merge-work-directories-length -1)
   (setq ido-use-virtual-buffers t)
-  (setq ido-everywhere t)
-  (global-set-key (kbd "C-x C-b") 'ibuffer))
+  (setq ido-everywhere t))
 
 
 (use-package intero
