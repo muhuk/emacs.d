@@ -24,6 +24,8 @@
 
 ;; Manually installed packages
 (add-to-list 'load-path "~/.emacs.d/vendor")
+(let ((default-directory  "~/.emacs.d/vendor/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 
 ;; Character Encoding
@@ -398,6 +400,14 @@
                                '((clojure . t)
                                  (emacs-lisp . t)
                                  (shell . t))))
+
+
+;; org-reveal doesn't install properly from MELPA for now.
+;; see: https://github.com/yjwen/org-reveal/issues/342
+(require 'ox-reveal)
+(setq org-reveal-root (concat (file-name-directory (or load-file-name
+                                                       buffer-file-name))
+                              "vendor/reveal.js-master-33bed47/"))
 
 
 (use-package paredit
