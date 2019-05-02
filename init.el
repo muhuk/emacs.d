@@ -131,7 +131,9 @@
 
 (use-package cider
   :ensure t
-  :bind ("C-c C-t u" . cider-test-run-unit-tests)
+  :bind
+  (("C-c C-x C-m" . cider-macroexpand-1)
+   ("C-c C-t u" . cider-test-run-unit-tests))
   :config
   (setq-default org-babel-clojure-backend 'cider
                 org-babel-clojure-sync-nrepl-timeout 5000)
@@ -153,7 +155,6 @@
 (use-package clj-refactor
   :ensure t
   :init
-  (setq-default cljr-inject-dependencies-at-jack-in nil)
   (add-hook 'clojure-mode-hook
 	    (lambda ()
 	      (clj-refactor-mode 1)
