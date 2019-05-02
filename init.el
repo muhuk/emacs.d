@@ -26,11 +26,11 @@
 
 ;; Manually installed packages
 (defconst vendor-path
-  (concat emacs-config-dir "vendor"))
+  (concat emacs-config-dir "vendor/"))
 (defconst vendor-plantuml-jar-path
-  (concat vendor-path "/plantuml.1.2019.5.jar"))
+  (concat vendor-path "plantuml.1.2019.5.jar"))
 (defconst vendor-reveal-js-root
-  (concat vendor-path "/reveal.js-master-33bed47/"))
+  (concat vendor-path "reveal.js-master-33bed47/"))
 (add-to-list 'load-path vendor-path)
 (let ((default-directory  vendor-path))
   (normal-top-level-add-subdirs-to-load-path))
@@ -46,10 +46,10 @@
 
 
 ;; Saving
-(setq backup-directory-alist '(("." . (concat emacs-config-dir "/backups"))))
+(setq backup-directory-alist `(("." . ,(concat emacs-config-dir "backups"))))
 (setq auto-save-default nil)
 (require 'recentf)
-(setq recentf-save-file (concat emacs-config-dir "/.recentf"))
+(setq recentf-save-file (concat emacs-config-dir ".recentf"))
 (recentf-mode 1)
 (setq recentf-max-menu-items 40)
 
@@ -113,7 +113,7 @@
 
 ;; Custom
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
-(setq custom-file (concat emacs-config-dir "/custom.el"))
+(setq custom-file (concat emacs-config-dir "custom.el"))
 (when (file-exists-p custom-file)
   (load-file custom-file))
 
@@ -133,7 +133,7 @@
 (use-package cargo
   :ensure t
   :init
-  (setq-default cider-repl-history-file (concat emacs-config-dir "/cider-history")
+  (setq-default cider-repl-history-file (concat emacs-config-dir "cider-history")
                 cider-repl-wrap-history t))
 
 
@@ -337,8 +337,8 @@
   (let ((github-markdown-css
          (with-temp-buffer
            ;; See https://github.com/sindresorhus/github-markdown-css
-           (insert-file-contents (concat emacs-config-dir
-                                         "/vendor/markdown/github-markdown.css"))
+           (insert-file-contents (concat vendor-path
+                                         "markdown/github-markdown.css"))
            (buffer-string))))
     (setq markdown-command "pandoc")
     (setq markdown-xhtml-header-content
