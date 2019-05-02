@@ -131,6 +131,8 @@
 
 (use-package cider
   :ensure t
+  :bind
+  (("C-c C-x C-m" . cider-macroexpand-1))
   :config
   (setq-default org-babel-clojure-backend 'cider
                 org-babel-clojure-sync-nrepl-timeout 5000))
@@ -139,7 +141,6 @@
 (use-package clj-refactor
   :ensure t
   :init
-  (setq-default cljr-inject-dependencies-at-jack-in nil)
   (add-hook 'clojure-mode-hook
 	    (lambda ()
 	      (clj-refactor-mode 1)
