@@ -4,6 +4,9 @@
 
 ;;; Code:
 
+(defconst emacs-config-dir (file-name-directory (or load-file-name
+                                                    buffer-file-name)))
+
 ;; Package repositories
 ;; default: ("gnu" . "http://elpa.gnu.org/packages/")
 (require 'package)
@@ -21,10 +24,15 @@
 (eval-when-compile
   (require 'use-package))
 
-
 ;; Manually installed packages
-(add-to-list 'load-path "~/.emacs.d/vendor")
-(let ((default-directory  "~/.emacs.d/vendor/"))
+(defconst vendor-path
+  (concat emacs-config-dir "vendor"))
+(defconst vendor-plantuml-jar-path
+  (concat vendor-path "/plantuml.1.2019.5.jar"))
+(defconst vendor-reveal-js-root
+  (concat vendor-path "/reveal.js-master-33bed47/"))
+(add-to-list 'load-path vendor-path)
+(let ((default-directory  vendor-path))
   (normal-top-level-add-subdirs-to-load-path))
 
 
@@ -38,10 +46,10 @@
 
 
 ;; Saving
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq backup-directory-alist '(("." . (concat emacs-config-dir "/backups"))))
 (setq auto-save-default nil)
 (require 'recentf)
-(setq recentf-save-file "~/.emacs.d/.recentf")
+(setq recentf-save-file (concat emacs-config-dir "/.recentf"))
 (recentf-mode 1)
 (setq recentf-max-menu-items 40)
 
@@ -105,7 +113,7 @@
 
 ;; Custom
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (concat emacs-config-dir "/custom.el"))
 (when (file-exists-p custom-file)
   (load-file custom-file))
 
@@ -125,7 +133,7 @@
 (use-package cargo
   :ensure t
   :init
-  (setq-default cider-repl-history-file "~/.emacs.d/cider-history"
+  (setq-default cider-repl-history-file (concat emacs-config-dir "/cider-history")
                 cider-repl-wrap-history t))
 
 
@@ -329,7 +337,8 @@
   (let ((github-markdown-css
          (with-temp-buffer
            ;; See https://github.com/sindresorhus/github-markdown-css
-           (insert-file-contents "~/.emacs.d/vendor/markdown/github-markdown.css")
+           (insert-file-contents (concat emacs-config-dir
+                                         "/vendor/markdown/github-markdown.css"))
            (buffer-string))))
     (setq markdown-command "pandoc")
     (setq markdown-xhtml-header-content
@@ -409,20 +418,20 @@
                                                  (todo "TODO"))))
                   org-stuck-projects '("LEVEL=2&CATEGORY=\"Projects\"" ("TODO" "ACTIVE") nil "")
                   org-src-fontify-natively t
-                  org-html-htmlize-output-type 'css))
+                  org-html-htmlize-output-type 'css
+                  org-plantuml-jar-path vendor-plantuml-jar-path))
   :config
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((clojure . t)
                                  (emacs-lisp . t)
+                                 (plantuml . t)
                                  (shell . t))))
 
 
 ;; org-reveal doesn't install properly from MELPA for now.
 ;; see: https://github.com/yjwen/org-reveal/issues/342
 (require 'ox-reveal)
-(setq org-reveal-root (concat (file-name-directory (or load-file-name
-                                                       buffer-file-name))
-                              "vendor/reveal.js-master-33bed47/"))
+(setq org-reveal-root vendor-reveal-js-root)
 
 
 (use-package paredit
@@ -442,7 +451,7 @@
 (use-package plantuml-mode
   :ensure t
   :init
-  (setq plantuml-jar-path "~/bin/plantuml.jar"))
+  (setq plantuml-jar-path vendor-plantuml-jar-path))
 
 
 (use-package rainbow-delimiters
