@@ -489,6 +489,9 @@
   (("<f12>" . tomatinho)))
 
 
+(use-package toml-mode
+  :ensure t)
+
 (use-package yaml-mode
   :ensure t)
 
