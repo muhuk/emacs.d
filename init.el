@@ -134,7 +134,8 @@
   :ensure t
   :init
   (setq-default cider-repl-history-file (concat emacs-config-dir "cider-history")
-                cider-repl-wrap-history t))
+                cider-repl-wrap-history t)
+  (add-hook 'cargo-process-mode-hook #'visual-line-mode))
 
 
 (use-package cider
