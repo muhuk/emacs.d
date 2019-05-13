@@ -143,22 +143,25 @@
   :bind
   (("C-c C-x C-m" . cider-macroexpand-1)
    ("C-c C-t u" . cider-test-run-unit-tests))
+  :init
+  (defvar cider-test-unit-tests-include)
+  (defvar cider-test-unit-tests-exclude)
   :config
   (setq-default org-babel-clojure-backend 'cider
-                org-babel-clojure-sync-nrepl-timeout 5000)
-  (let ((cider-test-unit-tests-include '())
-        (cider-test-unit-tests-exclude '("integration")))
-    (defun cider-test-run-unit-tests ()
-      (interactive)
-      (execute-kbd-macro (kbd (concat "C-u C-c C-t p "
-                                      (mapconcat 'identity
-                                                 cider-test-unit-tests-include
-                                                 " ")
-                                      " <RET> "
-                                      (mapconcat 'identity
-                                                 cider-test-unit-tests-exclude
-                                                 " ")
-                                      " <RET>"))))))
+                org-babel-clojure-sync-nrepl-timeout 5000
+                cider-test-unit-tests-include '()
+                cider-test-unit-tests-exclude '("integration"))
+  (defun cider-test-run-unit-tests ()
+    (interactive)
+    (execute-kbd-macro (kbd (concat "C-u C-c C-t p "
+                                    (mapconcat 'identity
+                                               cider-test-unit-tests-include
+                                               " ")
+                                    " <RET> "
+                                    (mapconcat 'identity
+                                               cider-test-unit-tests-exclude
+                                               " ")
+                                    " <RET>")))))
 
 
 (use-package clj-refactor
