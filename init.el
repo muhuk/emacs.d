@@ -435,8 +435,7 @@
 (use-package org-re-reveal
   :ensure t
   :config
-  (setq-default org-re-reveal-root vendor-reveal-js-root
-                org-re-reveal-title-slide nil))
+  (setq-default org-re-reveal-root vendor-reveal-js-root))
 
 
 (use-package paredit
