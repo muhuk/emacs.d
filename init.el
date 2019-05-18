@@ -432,10 +432,10 @@
                                  (shell . t))))
 
 
-;; org-reveal doesn't install properly from MELPA for now.
-;; see: https://github.com/yjwen/org-reveal/issues/342
-(require 'ox-reveal)
-(setq org-reveal-root vendor-reveal-js-root)
+(use-package org-re-reveal
+  :ensure t
+  :config
+  (setq-default org-re-reveal-root vendor-reveal-js-root))
 
 
 (use-package paredit
