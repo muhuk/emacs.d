@@ -458,12 +458,30 @@
   (setq plantuml-jar-path vendor-plantuml-jar-path))
 
 
+;; Add these to toolchain:
+;;
+;;     rustup component add rust-src
+;;     cargo +nightly install racer
+;;
+(use-package racer
+  :ensure t
+  :init
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  :config
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common))
+
+
 (use-package rainbow-delimiters
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 
+;; Add these to toolchain:
+;;
+;;     rustup component add clippy rustfmt
+;;
 (use-package rust-mode
   :ensure t
   :init
