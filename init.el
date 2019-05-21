@@ -483,7 +483,7 @@
    ;; ("M-x" . smex-major-mode-commands)
    ;; Vanilla M-x
    ("C-c C-c C-c" . execute-extended-command))
-  :init
+  :config
   (smex-initialize))
 
 
