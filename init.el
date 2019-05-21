@@ -479,11 +479,8 @@
 (use-package smex
   :ensure t
   :bind
-  (("M-x" . smex)
-   ;; ("M-x" . smex-major-mode-commands)
-   ;; Vanilla M-x
-   ("C-c C-c C-c" . execute-extended-command))
-  :init
+  (("M-x" . smex))
+  :config
   (smex-initialize))
 
 
