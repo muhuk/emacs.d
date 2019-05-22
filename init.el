@@ -279,6 +279,12 @@
   :ensure t)
 
 
+(use-package hydra
+  :ensure t
+  :config
+  (mapc 'load (file-expand-wildcards (concat emacs-config-dir "include/hydra/*.inc"))))
+
+
 (use-package ibuffer-vc
   :ensure t
   :config
