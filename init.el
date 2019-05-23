@@ -164,6 +164,12 @@
                                     " <RET>")))))
 
 
+(use-package cider-hydra
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'cider-hydra-mode))
+
+
 (use-package clj-refactor
   :ensure t
   :init
