@@ -521,5 +521,12 @@
   :ensure t)
 
 
+(use-package which-key
+  :ensure t
+  :config
+  (setq which-key-popup-type 'minibuffer)
+  (which-key-mode))
+
+
 (provide 'init)
 ;;; init.el ends here
