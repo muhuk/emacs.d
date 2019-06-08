@@ -50,8 +50,9 @@
 (setq auto-save-default nil)
 (require 'recentf)
 (setq recentf-save-file (concat emacs-config-dir ".recentf"))
-(recentf-mode 1)
 (setq recentf-max-menu-items 40)
+(setq recentf-max-saved-items 40)
+(recentf-mode 1)
 
 
 ;; UI tweaks
