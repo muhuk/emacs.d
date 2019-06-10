@@ -119,8 +119,40 @@
   (load-file custom-file))
 
 
+;; Switch Buffers
+(defconst skippable-buffers (rx string-start
+                                (or "*Backtrace*"
+                                    "*cider"
+                                    "*Completions*"
+                                    "*Ibuffer*"
+                                    "*Messages*"
+                                    "*scratch*")))
+(defun change-buffer-skipping (change-buffer)
+  "Call CHANGE-BUFFER until current buffer is not in `skippable-buffers'."
+  (let ((initial (current-buffer)))
+    (funcall change-buffer)
+    (let ((first-change (current-buffer)))
+      (catch 'loop
+        (while (string-match-p skippable-buffers (buffer-name))
+          (funcall change-buffer)
+          (when (eq (current-buffer) first-change)
+            (switch-to-buffer initial)
+            (throw 'loop t)))))))
+(defun next-buffer-skipping ()
+  "Variant of `next-buffer' that skips `skippable-buffers'."
+  (interactive)
+  (change-buffer-skipping 'next-buffer))
+(defun previous-buffer-skipping ()
+  "Variant of `previous-buffer' that skips `skippable-buffers'."
+  (interactive)
+  (change-buffer-skipping 'previous-buffer))
+(global-set-key [remap next-buffer] 'next-buffer-skipping)
+(global-set-key [remap previous-buffer] 'previous-buffer-skipping)
+
+
 ;; IBuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
 
 ;; Themes
 ;;   dracula-theme
@@ -304,12 +336,11 @@
 (use-package ido
   :ensure t
   :config
-  (ido-mode 1)
   (setq ido-enable-flex-matching t)
   (setq ido-use-filename-at-point nil)
   (setq ido-auto-merge-work-directories-length -1)
-  (setq ido-use-virtual-buffers t)
-  (setq ido-everywhere t))
+  (setq ido-everywhere t)
+  (ido-mode 1))
 
 
 (use-package intero
