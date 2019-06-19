@@ -166,8 +166,6 @@
 (use-package cargo
   :ensure t
   :init
-  (setq-default cider-repl-history-file (concat emacs-config-dir "cider-history")
-                cider-repl-wrap-history t)
   (add-hook 'cargo-process-mode-hook #'visual-line-mode))
 
 
@@ -180,10 +178,12 @@
   (defvar cider-test-unit-tests-include)
   (defvar cider-test-unit-tests-exclude)
   :config
+  (setq cider-repl-history-file (concat emacs-config-dir "cider-history")
+        cider-repl-wrap-history t
+        cider-test-unit-tests-include '()
+        cider-test-unit-tests-exclude '("integration"))
   (setq-default org-babel-clojure-backend 'cider
-                org-babel-clojure-sync-nrepl-timeout 5000
-                cider-test-unit-tests-include '()
-                cider-test-unit-tests-exclude '("integration"))
+                org-babel-clojure-sync-nrepl-timeout 5000)
   (defun cider-test-run-unit-tests ()
     (interactive)
     (execute-kbd-macro (kbd (concat "C-u C-c C-t p "
