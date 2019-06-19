@@ -150,6 +150,10 @@
 (global-set-key [remap previous-buffer] 'previous-buffer-skipping)
 
 
+;; Start Server
+(run-at-time "1 min" nil #'server-start)
+
+
 ;; IBuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
