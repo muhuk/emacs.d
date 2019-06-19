@@ -170,6 +170,7 @@
 (use-package cargo
   :ensure t
   :init
+  (add-hook 'rust-mode-hook #'cargo-minor-mode)
   (add-hook 'cargo-process-mode-hook #'visual-line-mode))
 
 
