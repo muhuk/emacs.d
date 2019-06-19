@@ -476,6 +476,12 @@
                                  (shell . t))))
 
 
+(use-package org-bullets
+  :ensure t
+  :commands org-bullets-mode
+  :hook (org-mode . org-bullets-mode))
+
+
 (use-package org-re-reveal
   :ensure t
   :config
