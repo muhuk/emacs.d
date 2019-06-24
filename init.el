@@ -513,6 +513,16 @@
   (setq plantuml-jar-path vendor-plantuml-jar-path))
 
 
+(use-package psc-ide
+  :ensure t
+  :hook ((purescript-mode . psc-ide-mode)
+         (purescript-mode . turn-on-purescript-indentation)))
+
+
+(use-package purescript-mode
+  :ensure t)
+
+
 ;; Add these to toolchain:
 ;;
 ;;     rustup component add rust-src
