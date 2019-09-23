@@ -241,6 +241,10 @@
   (global-company-mode))
 
 
+(use-package company-lsp
+  :ensure t)
+
+
 (use-package default-text-scale
   :ensure t
   :config
@@ -372,6 +376,15 @@
 
 
 (use-package love-minor-mode
+  :ensure t)
+
+
+(use-package lsp-mode
+  :ensure t
+  :hook (scala-mode . lsp))
+
+
+(use-package lsp-ui
   :ensure t)
 
 
@@ -543,6 +556,22 @@
   (add-hook 'rust-mode-hook #'flycheck-rust-setup)
   :config
   (setq rust-format-on-save t))
+
+
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
+(use-package scala-mode
+  :ensure t
+  :mode "\\.s\\(cala\\|bt\\)$")
 
 
 (use-package seq
