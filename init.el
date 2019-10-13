@@ -358,6 +358,10 @@
   (add-hook 'haskell-mode-hook 'intero-mode))
 
 
+(use-package jinja2-mode
+  :ensure t)
+
+
 (use-package ledger-mode
   :ensure t
   :init
