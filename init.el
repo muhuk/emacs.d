@@ -359,7 +359,8 @@
 
 
 (use-package jinja2-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.html\\'")
 
 
 (use-package ledger-mode
