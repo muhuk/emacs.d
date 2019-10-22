@@ -452,6 +452,7 @@
           org-agenda-files `(,(diary-file "calendar.org")
                              ,(diary-file "gtd.org")
                              ,(diary-file "journal.org"))
+          org-modules (append org-modules '(org-habit))
           org-refile-targets `((org-agenda-files . (:maxlevel . 3))
                                (,(diary-file "someday.org") . (:maxlevel . 3))))
     (setq-default org-capture-templates `(("t"
