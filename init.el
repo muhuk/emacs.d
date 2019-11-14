@@ -63,7 +63,10 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 (show-paren-mode 1)
-(global-linum-mode 1)
+;; instead of enabling line numbers for all modes
+;; via (global-linum-mode 1), we enable only for
+;; programming modes:
+(add-hook 'prog-mode-hook 'linum-mode)
 (global-hl-line-mode 1)
 (set-face-attribute 'default nil :height 120)
 (blink-cursor-mode 0)
@@ -162,9 +165,7 @@
 ;;   dracula-theme
 ;;   flatland-theme
 (use-package dracula-theme
-  :ensure t
-  :config
-  (set-face-attribute 'linum nil :height 100))
+  :ensure t)
 
 
 (use-package cargo
