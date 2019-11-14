@@ -454,7 +454,11 @@
                              ,(diary-file "journal.org"))
           org-modules (append org-modules '(org-habit))
           org-refile-targets `((org-agenda-files . (:maxlevel . 3))
-                               (,(diary-file "someday.org") . (:maxlevel . 3))))
+                               (,(diary-file "someday.org") . (:maxlevel . 3)))
+          org-habit-show-habits-only-for-today nil
+          org-habit-graph-column 70
+          org-habit-preceding-days 23
+          org-habit-following-days 7)
     (setq-default org-capture-templates `(("t"
                                            "Todo"
                                            entry
