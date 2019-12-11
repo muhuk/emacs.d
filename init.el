@@ -458,8 +458,8 @@
                                (,(diary-file "someday.org") . (:maxlevel . 3)))
           org-habit-show-habits-only-for-today nil
           org-habit-graph-column 70
-          org-habit-preceding-days 23
-          org-habit-following-days 7)
+          org-habit-preceding-days 35
+          org-habit-following-days 14)
     (setq-default org-capture-templates `(("t"
                                            "Todo"
                                            entry
