@@ -1,4 +1,6 @@
 .#*
+.lsp-session*
+.org-id-locations
 .recentf
 *.*~
 *.elc
