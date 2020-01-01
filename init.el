@@ -537,6 +537,13 @@
   (setq plantuml-jar-path vendor-plantuml-jar-path))
 
 
+;; Python tweaks
+(setq python-shell-interpreter "python3")
+(setq flycheck-python-pycompile-executable "python3"
+      flycheck-python-pylint-executable "python3"
+      flycheck-python-flake8-executable "python3")
+
+
 ;; Add these to toolchain:
 ;;
 ;;     rustup component add rust-src
