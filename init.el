@@ -310,6 +310,10 @@
   :ensure t)
 
 
+(use-package glsl-mode
+  :ensure t)
+
+
 (use-package golden-ratio-scroll-screen
   :ensure t
   :config
