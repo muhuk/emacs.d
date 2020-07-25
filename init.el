@@ -307,7 +307,9 @@
 
 
 (use-package flycheck-rust
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 
 (use-package glsl-mode
