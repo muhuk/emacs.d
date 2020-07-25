@@ -28,7 +28,7 @@
 (defconst vendor-path
   (concat emacs-config-dir "vendor/"))
 (defconst vendor-plantuml-jar-path
-  (concat vendor-path "plantuml.1.2019.5.jar"))
+  (concat vendor-path "plantuml.1.2020.15.jar"))
 (defconst vendor-reveal-js-root
   (concat vendor-path "reveal.js-master-33bed47/"))
 (add-to-list 'load-path vendor-path)
@@ -541,7 +541,8 @@
 (use-package plantuml-mode
   :ensure t
   :init
-  (setq plantuml-jar-path vendor-plantuml-jar-path))
+  (setq plantuml-jar-path vendor-plantuml-jar-path
+        plantuml-default-exec-mode 'jar))
 
 
 ;; Python tweaks
