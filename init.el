@@ -480,7 +480,7 @@
                                           ("s"
                                            "Someday"
                                            entry
-                                           (file+olp ,(diary-file "someday.org") "Backlog" "Other")
+                                           (file+olp ,(diary-file "someday.org") "Backlog")
                                            (file ,(diary-file "templates/someday.txt")))
                                           ("d"
                                            "Daily review"
