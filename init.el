@@ -277,7 +277,10 @@
   :config
   (global-flycheck-mode)
   (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-global-modes '(not org-mode)))
+  (setq flycheck-global-modes '(not org-mode))
+  (setq-default flycheck-disabled-checkers
+                '(python-pylint
+                  python-pycompile)))
 
 
 (use-package flycheck-clojure
@@ -545,13 +548,6 @@
         plantuml-default-exec-mode 'jar))
 
 
-;; Python tweaks
-(setq python-shell-interpreter "python3")
-(setq flycheck-python-pycompile-executable "python3"
-      flycheck-python-pylint-executable "python3"
-      flycheck-python-flake8-executable "python3")
-
-
 ;; Add these to toolchain:
 ;;
 ;;     rustup component add rust-src
@@ -582,7 +578,8 @@
   :init
   (add-hook 'rust-mode-hook #'flycheck-rust-setup)
   :config
-  (setq rust-format-on-save t))
+  (setq rust-format-on-save t
+        rust-format-show-buffer nil))
 
 
 (use-package sbt-mode
