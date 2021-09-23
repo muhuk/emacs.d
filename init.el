@@ -271,6 +271,7 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+
 (use-package flycheck
   :ensure t
   :commands flycheck-mode
