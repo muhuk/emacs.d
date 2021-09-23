@@ -165,7 +165,9 @@
 ;;   dracula-theme
 ;;   flatland-theme
 (use-package dracula-theme
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'dracula t nil))
 
 
 (use-package cargo
