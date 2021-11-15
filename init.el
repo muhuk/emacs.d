@@ -548,7 +548,8 @@
   :ensure t
   :init
   (setq plantuml-jar-path vendor-plantuml-jar-path
-        plantuml-default-exec-mode 'jar))
+        plantuml-default-exec-mode 'jar
+        plantuml-indent-level 2))
 
 
 ;; Add these to toolchain:
