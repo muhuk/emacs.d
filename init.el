@@ -28,7 +28,7 @@
 (defconst vendor-path
   (concat emacs-config-dir "vendor/"))
 (defconst vendor-plantuml-jar-path
-  (concat vendor-path "plantuml.1.2020.15.jar"))
+  (concat vendor-path "plantuml-1.2021.14.jar"))
 (defconst vendor-reveal-js-root
   (concat vendor-path "reveal.js-master-33bed47/"))
 (add-to-list 'load-path vendor-path)
@@ -548,6 +548,10 @@
   :ensure t
   :init
   (setq plantuml-jar-path vendor-plantuml-jar-path
+        plantuml-java-args (list "-Djava.awt.headless=true"
+                                 "-jar"
+                                 "--illegal-access=deny"
+                                 "-DRELATIVE_INCLUDE=\".\"")
         plantuml-default-exec-mode 'jar
         plantuml-indent-level 2))
 
