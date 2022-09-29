@@ -244,10 +244,6 @@
   (global-company-mode))
 
 
-(use-package company-lsp
-  :ensure t)
-
-
 (use-package default-text-scale
   :ensure t
   :config
