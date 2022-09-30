@@ -599,12 +599,6 @@
   (smex-initialize))
 
 
-(use-package tomatinho
-  :ensure t
-  :bind
-  (("<f12>" . tomatinho)))
-
-
 (use-package toml-mode
   :ensure t)
 
