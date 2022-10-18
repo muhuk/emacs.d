@@ -29,8 +29,6 @@
   (concat emacs-config-dir "vendor/"))
 (defconst vendor-plantuml-jar-path
   (concat vendor-path "plantuml-1.2021.14.jar"))
-(defconst vendor-reveal-js-root
-  (concat vendor-path "reveal.js-master-33bed47/"))
 (add-to-list 'load-path vendor-path)
 (let ((default-directory  vendor-path))
   (normal-top-level-add-subdirs-to-load-path))
@@ -503,12 +501,6 @@
   :ensure t
   :commands org-bullets-mode
   :hook (org-mode . org-bullets-mode))
-
-
-(use-package org-re-reveal
-  :ensure t
-  :config
-  (setq-default org-re-reveal-root vendor-reveal-js-root))
 
 
 (use-package paredit
