@@ -268,7 +268,8 @@
   (setq flycheck-global-modes '(not org-mode))
   (setq-default flycheck-disabled-checkers
                 '(python-pylint
-                  python-pycompile)))
+                  python-pycompile))
+  (setq flycheck-python-flake8-executable "flake8"))
 
 
 (use-package flycheck-clojure
