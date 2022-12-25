@@ -345,12 +345,6 @@
   (ido-mode 1))
 
 
-(use-package intero
-  :ensure t
-  :init
-  (add-hook 'haskell-mode-hook 'intero-mode))
-
-
 (use-package jinja2-mode
   :ensure t
   :mode "\\.html\\'")
