@@ -1,6 +1,6 @@
 ;;; rust-mode.el --- A major-mode for editing Rust source code -*-lexical-binding: t-*-
 
-;; Version: 0.5.0
+;; Version: 1.0.5
 ;; Author: Mozilla
 ;; Url: https://github.com/rust-lang/rust-mode
 ;; Keywords: languages
@@ -30,6 +30,22 @@ This variable might soon be remove again.")
 (defvar electric-pair-inhibit-predicate)
 (defvar electric-pair-skip-self)
 (defvar electric-indent-chars)
+
+(defcustom rust-before-save-hook 'rust-before-save-method
+  "Function for formatting before save."
+  :type 'function
+  :group 'rust-mode)
+
+(defcustom rust-after-save-hook 'rust-after-save-method
+  "Default method to handle rustfmt invocation after save."
+  :type 'function
+  :group 'rust-mode)
+
+(defvar rust-prettify-symbols-alist
+  '(("&&" . ?∧) ("||" . ?∨)
+    ("<=" . ?≤)  (">=" . ?≥) ("!=" . ?≠)
+    ("INFINITY" . ?∞) ("->" . ?→) ("=>" . ?⇒))
+  "Alist of symbol prettifications used for `prettify-symbols-alist'.")
 
 ;;; Customization
 
@@ -89,6 +105,11 @@ to the function arguments.  When nil, `->' will be indented one level."
 (defface rust-question-mark
   '((t :weight bold :inherit font-lock-builtin-face))
   "Face for the question mark operator."
+  :group 'rust-mode)
+
+(defface rust-ampersand-face
+  '((t :inherit default))
+  "Face for the ampersand reference mark."
   :group 'rust-mode)
 
 (defface rust-builtin-formatting-macro
@@ -194,12 +215,34 @@ Use idomenu (imenu with `ido-mode') for best mileage.")
     table)
   "Syntax definitions and helpers.")
 
+;;; Prettify
+
+(defun rust--prettify-symbols-compose-p (start end match)
+  "Return true iff the symbol MATCH should be composed.
+See `prettify-symbols-compose-predicate'."
+  (and (fboundp 'prettify-symbols-default-compose-p)
+       (prettify-symbols-default-compose-p start end match)
+       ;; Make sure || is not a closure with 0 arguments and && is not
+       ;; a double reference.
+       (pcase match
+         ("||" (not (save-excursion
+                      (goto-char start)
+                      (looking-back "\\(?:\\<move\\|[[({:=,;]\\) *"
+                                    (line-beginning-position)))))
+         ("&&" (char-equal (char-after end) ?\s))
+         (_ t))))
+
 ;;; Mode
 
 (defvar rust-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-d") 'rust-dbg-wrap-or-unwrap)
     (when rust-load-optional-libraries
+      (define-key map (kbd "C-c C-c C-u") 'rust-compile)
+      (define-key map (kbd "C-c C-c C-k") 'rust-check)
+      (define-key map (kbd "C-c C-c C-t") 'rust-test)
+      (define-key map (kbd "C-c C-c C-r") 'rust-run)
+      (define-key map (kbd "C-c C-c C-l") 'rust-run-clippy)
       (define-key map (kbd "C-c C-f") 'rust-format-buffer)
       (define-key map (kbd "C-c C-n") 'rust-goto-format-problem))
     map)
@@ -258,24 +301,26 @@ Use idomenu (imenu with `ido-mode') for best mileage.")
   (setq-local electric-pair-inhibit-predicate
               'rust-electric-pair-inhibit-predicate-wrap)
   (setq-local electric-pair-skip-self 'rust-electric-pair-skip-self-wrap)
+  ;; Configure prettify
+  (setq prettify-symbols-alist rust-prettify-symbols-alist)
+  (setq prettify-symbols-compose-predicate #'rust--prettify-symbols-compose-p)
 
-  (add-hook 'before-save-hook 'rust-before-save-hook nil t)
-  (add-hook 'after-save-hook 'rust-after-save-hook nil t)
-  )
+  (add-hook 'before-save-hook rust-before-save-hook nil t)
+  (add-hook 'after-save-hook rust-after-save-hook nil t))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 (defvar rust-top-item-beg-re
-  (concat "\\s-*"
+  (concat "\\s-*\\(?:priv\\|pub\\)?\\s-*"
           ;; TODO some of this does only make sense for `fn' (unsafe, extern...)
           ;; and not other items
           (rust-re-shy (concat (rust-re-shy rust-re-vis) "[[:space:]]+")) "?"
           (rust-re-shy (concat (rust-re-shy rust-re-async-or-const) "[[:space:]]+")) "?"
           (rust-re-shy (concat (rust-re-shy rust-re-unsafe) "[[:space:]]+")) "?"
           (regexp-opt
-           '("enum" "struct" "union" "type" "mod" "use" "fn" "static" "impl"
-             "extern" "trait"))
+           '("enum" "struct" "union" "type" "mod" "fn" "static" "impl"
+             "extern" "trait" "async"))
           "\\_>")
   "Start of a Rust item.")
 
@@ -289,7 +334,7 @@ Use idomenu (imenu with `ido-mode') for best mileage.")
     "box" "break"
     "const" "continue" "crate"
     "do" "dyn"
-    "else" "enum" "extern"
+    "else" "enum" "extern" "existential"
     "false" "fn" "for"
     "if" "impl" "in"
     "let" "loop"
@@ -315,6 +360,16 @@ Use idomenu (imenu with `ido-mode') for best mileage.")
     "isize" "usize"
     "bool"
     "str" "char"))
+
+(defconst rust-number-with-type
+  (eval-when-compile
+    (concat
+     "\\_<\\(?:0[box]?\\|[1-9]\\)[[:digit:]a-fA-F_.]*\\(?:[eE][+-]?[[:digit:]_]\\)?"
+     (regexp-opt '("u8" "i8" "u16" "i16" "u32" "i32" "u64" "i64"
+                   "u128" "i128" "usize" "isize" "f32" "f64")
+                 t)
+     "\\_>"))
+  "Regular expression matching a number with a type suffix.")
 
 (defvar rust-builtin-formatting-macros
   '("eprint"
@@ -423,6 +478,10 @@ Does not match type annotations of the form \"foo::<\"."
 
      ;; Question mark operator
      ("\\?" . 'rust-question-mark)
+     ("\\(&+\\)\\(?:'\\(?:\\<\\|_\\)\\|\\<\\|[[({:*_|]\\)"
+      1 'rust-ampersand-face)
+     ;; Numbers with type suffix
+     (,rust-number-with-type 1 font-lock-type-face)
      )
 
    ;; Ensure we highlight `Foo` in `struct Foo` as a type.
@@ -1263,7 +1322,8 @@ This wraps the default defined by `electric-pair-inhibit-predicate'."
 This wraps the default defined by `electric-pair-skip-self'."
   (or
    (= ?> char)
-   (funcall (default-value 'electric-pair-skip-self) char)))
+   (let ((skip-self (default-value 'electric-pair-skip-self)))
+     (and skip-self (funcall skip-self char)))))
 
 (defun rust-ordinary-lt-gt-p ()
   "Test whether the `<' or `>' at point is an ordinary operator of some kind.
