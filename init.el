@@ -242,6 +242,13 @@
   (global-company-mode))
 
 
+(use-package company-ledger
+  :ensure t
+  :init
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-ledger)))
+
+
 (use-package default-text-scale
   :ensure t
   :config
