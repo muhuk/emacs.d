@@ -233,7 +233,6 @@
 
 (use-package company
   :ensure t
-  :defer t
   :init
   (setq company-minimum-prefix-length 2
         company-selection-wrap-around t
@@ -243,7 +242,7 @@
 
 
 (use-package company-ledger
-  :ensure t
+  :ensure company
   :init
   (with-eval-after-load 'company
     (add-to-list 'company-backends 'company-ledger)))
