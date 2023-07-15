@@ -10,5 +10,6 @@ backups
 bookmarks
 cider-history
 custom.el
+eln-cache
 ido.last
 smex-items

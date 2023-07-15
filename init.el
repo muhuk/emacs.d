@@ -379,6 +379,9 @@
 
 (use-package lsp-mode
   :ensure t
+  :config
+  (setq gc-cons-threshold 2000000)
+  (setq read-process-output-max (* 1024 1024))
   :hook (scala-mode . lsp))
 
 
@@ -530,21 +533,6 @@
         plantuml-indent-level 2))
 
 
-;; Add these to toolchain:
-;;
-;;     rustup component add rust-src
-;;     cargo +nightly install racer
-;;
-(use-package racer
-  :ensure t
-  :init
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
-  :config
-  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common))
-
-
 (use-package rainbow-delimiters
   :ensure t
   :init
@@ -553,12 +541,13 @@
 
 ;; Add these to toolchain:
 ;;
-;;     rustup component add clippy rustfmt
+;;     rustup component add clippy rustfmt rust-analyzer
 ;;
 (use-package rust-mode
   :ensure t
   :init
   (add-hook 'rust-mode-hook #'flycheck-rust-setup)
+  (add-hook 'rust-mode-hook #'lsp)
   :config
   (setq rust-format-on-save t
         rust-format-show-buffer nil))
@@ -605,6 +594,10 @@
   (setq which-key-popup-type 'minibuffer)
   (which-key-mode))
 
+
+(use-package yasnippet
+  :ensure t
+  :hook ((lsp-mode . yas-minor-mode)))
 
 (provide 'init)
 ;;; init.el ends here
