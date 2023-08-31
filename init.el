@@ -533,6 +533,10 @@
         plantuml-indent-level 2))
 
 
+(use-package python-mode
+  :ensure t)
+
+
 (use-package rainbow-delimiters
   :ensure t
   :init
