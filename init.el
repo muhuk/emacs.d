@@ -588,7 +588,12 @@
 (use-package toml-mode
   :ensure t)
 
+
 (use-package yaml-mode
+  :ensure t)
+
+
+(use-package wgsl-mode
   :ensure t)
 
 
