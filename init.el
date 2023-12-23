@@ -430,7 +430,9 @@
     (add-hook 'emacs-startup-hook
               (lambda ()
                 (interactive)
-                (org-agenda nil "A")))
+                (org-agenda nil "A")
+                (split-window-horizontally)
+                (find-file (diary-file "gtd.org"))))
     (add-hook 'org-mode-hook (lambda ()
                                (auto-revert-mode 1)
                                (require 'ob-clojure)))
