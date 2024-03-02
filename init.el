@@ -168,6 +168,10 @@
   (load-theme 'dracula t nil))
 
 
+(use-package adoc-mode
+  :ensure t)
+
+
 (use-package cargo
   :ensure t
   :init
