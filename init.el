@@ -28,7 +28,7 @@
 (defconst vendor-path
   (concat emacs-config-dir "vendor/"))
 (defconst vendor-plantuml-jar-path
-  (concat vendor-path "plantuml-1.2021.14.jar"))
+  (concat vendor-path "plantuml-1.2025.1.jar"))
 (add-to-list 'load-path vendor-path)
 (let ((default-directory  vendor-path))
   (normal-top-level-add-subdirs-to-load-path))
