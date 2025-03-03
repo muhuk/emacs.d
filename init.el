@@ -390,7 +390,8 @@
 
 
 (use-package lsp-ui
-  :ensure t)
+  :ensure t
+  :commands lsp-ui-mode)
 
 
 (use-package lua-mode
