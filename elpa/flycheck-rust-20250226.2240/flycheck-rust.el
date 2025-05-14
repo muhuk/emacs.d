@@ -2,14 +2,14 @@
 
 ;; Copyright (C) 2016, 2017  fmdkdd
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
+;; Copyright (C) 2024-2025  Shen, Jen-Chieh
 
 ;; Author: Sebastian Wiesner <swiesner@lunaryorn.com>
 ;; URL: https://github.com/flycheck/flycheck-rust
-;; Package-Version: 20190319.1546
-;; Package-Commit: a139cd53c5062697e9ed94ad80b803c37d999600
 ;; Keywords: tools, convenience
-;; Version: 1.1
-;; Package-Requires: ((emacs "24.1") (flycheck "28") (dash "2.13.0") (seq "2.3") (let-alist "1.0.4"))
+;; Package-Version: 20250226.2240
+;; Package-Revision: 2b544bab19b9
+;; Package-Requires: ((emacs "27.1") (flycheck "28") (dash "2.13.0") (seq "2.3") (let-alist "1.0.4"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -107,7 +107,8 @@ more information on setting your PATH with Emacs."))
                                              "--manifest-path" manifest
                                              "--format-version" "1")
                                (goto-char (point-min))
-                               (let ((json-array-type 'list))
+                               (let ((json-array-type 'list)
+                                     (json-object-type 'alist))
                                  (json-read)))
                            .packages))
       (seq-map (lambda (pkg)

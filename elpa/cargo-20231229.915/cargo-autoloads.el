@@ -1,4 +1,4 @@
-;;; cargo-autoloads.el --- automatically extracted autoloads
+;;; cargo-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -12,16 +12,25 @@
 (autoload 'cargo-minor-mode "cargo" "\
 Cargo minor mode. Used to hold keybindings for cargo-mode.
 
-If called interactively, enable Cargo minor mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the `cargo
+minor mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `cargo-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 \\{cargo-minor-mode-command-map}
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cargo" '("cargo-m")))
+(register-definition-prefixes "cargo" '("cargo-"))
 
 ;;;***
 
@@ -123,12 +132,12 @@ Cargo: Update dependencies listed in Cargo.lock." t nil)
 (autoload 'cargo-process-fmt "cargo-process" "\
 Run the Cargo fmt command.
 With the prefix argument, modify the command's invocation.
-Requires Cargo Fmt to be installed." t nil)
+Requires rustfmt to be installed." t nil)
 
 (autoload 'cargo-process-outdated "cargo-process" "\
 Run the Cargo outdated command.
 With the prefix argument, modify the command's invocation.
-Requires Cargo Outdated to be installed." t nil)
+Requires cargo-outdated to be installed." t nil)
 
 (autoload 'cargo-process-check "cargo-process" "\
 Run the Cargo check command.
@@ -140,7 +149,7 @@ Requires cargo-check to be installed." t nil)
 Run the Cargo clippy command.
 With the prefix argument, modify the command's invocation.
 Cargo: Clippy compile the current project.
-Requires Cargo clippy to be installed." t nil)
+Requires clippy to be installed." t nil)
 
 (autoload 'cargo-process-add "cargo-process" "\
 Run the Cargo add command.
@@ -154,7 +163,25 @@ Cargo: This command allows you to add a dependency to a Cargo.toml manifest file
 Run the Cargo audit command.
 With the prefix argument, modify the command's invocation.
 Cargo: Audit checks the current project's Cargo.lock for security vulnerabilities.
-Requires Cargo Audit to be installed." t nil)
+Requires cargo-audit to be installed." t nil)
+
+(autoload 'cargo-process-script "cargo-process" "\
+Run the Cargo script command.
+With the prefix argument, modify the command's invocation.
+Cargo: Script compiles and runs 'Cargoified Rust scripts'.
+Requires cargo-script to be installed." t nil)
+
+(autoload 'cargo-process-watch "cargo-process" "\
+Run the Cargo watch command.
+With the prefix argument, modify the command's invocation.
+Cargo: Watches over your Cargo project’s source.
+Requires cargo-watch to be installed." t nil)
+
+(autoload 'cargo-process-watch-run "cargo-process" "\
+Run the Cargo watch command.
+With the prefix argument, modify the command's invocation.
+Cargo: Watches over your Cargo project’s source.
+Requires cargo-watch to be installed." t nil)
 
 (autoload 'cargo-process-rm "cargo-process" "\
 Run the Cargo rm command.
@@ -175,7 +202,7 @@ Cargo: Upgrade dependencies as specified in the local manifest file
 (autoload 'cargo-process-repeat "cargo-process" "\
 Run the last cargo-process command." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cargo-process" '("cargo-" "manifest-path-argument" "rustc-errno" "set-rust-backtrace")))
+(register-definition-prefixes "cargo-process" '("cargo-" "manifest-path-argument" "rustc-errno" "set-rust-backtrace"))
 
 ;;;***
 
