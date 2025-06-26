@@ -72,6 +72,7 @@
 (setq-default frame-title-format "%b (%f)")
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq column-number-mode t)
+(setq-default compilation-scroll-output t)
 
 
 ;; Keyboard
