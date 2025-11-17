@@ -64,7 +64,7 @@
 ;; instead of enabling line numbers for all modes
 ;; via (global-linum-mode 1), we enable only for
 ;; programming modes:
-(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (global-hl-line-mode 1)
 (set-face-attribute 'default nil :height 120)
 (blink-cursor-mode 0)
@@ -293,12 +293,6 @@
   :ensure t)
 
 
-(use-package flycheck-haskell
-  :ensure t
-  :init
-  (add-hook 'flycheck-mode-hook 'flycheck-haskell-setup))
-
-
 (use-package flycheck-ledger
   :ensure t)
 
@@ -318,13 +312,6 @@
   :config
   (global-set-key [remap scroll-down-command] 'golden-ratio-scroll-screen-down)
   (global-set-key [remap scroll-up-command] 'golden-ratio-scroll-screen-up))
-
-(use-package haskell-mode
-  :ensure t
-  :config
-  (load "haskell-mode-autoloads")
-  :init
-  (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 
 (use-package htmlize
