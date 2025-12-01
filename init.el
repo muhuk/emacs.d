@@ -289,10 +289,6 @@
   (eval-after-load 'flycheck '(flycheck-clojure-setup)))
 
 
-(use-package flycheck-ghcmod
-  :ensure t)
-
-
 (use-package flycheck-ledger
   :ensure t)
 
