@@ -3,7 +3,9 @@
 ;; Copyright (C) 2012-2016 Magnar Sveen
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
-;; Version: 1.4.0
+;; Package-Version: 1.5.0
+;; Package-Revision: 1.5.0-0-g89f1a8df9b1f
+;; Package-Requires: ((cl-lib "0.5"))
 ;; Keywords: editing cursors
 ;; Homepage: https://github.com/magnars/multiple-cursors.el
 
@@ -153,7 +155,6 @@
 
 ;; * isearch-forward and isearch-backward aren't supported with multiple cursors.
 ;;   You should feel free to add a simplified version that can work with it.
-;; * Commands run with `M-x` won't be repeated for all cursors.
 ;; * All key bindings that refer to lambdas are always run for all cursors. If you
 ;;   need to limit it, you will have to give it a name.
 ;; * Redo might screw with your cursors. Undo works very well.
