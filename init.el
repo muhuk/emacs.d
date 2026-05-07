@@ -367,10 +367,13 @@
 
 (use-package lsp-mode
   :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :config
   (setq gc-cons-threshold 2000000)
   (setq read-process-output-max (* 1024 1024))
-  :hook (scala-mode . lsp))
+  :hook ((scala-mode . lsp)
+         (lsp-mode-hook . lsp-enable-which-key-integration)))
 
 
 (use-package lsp-ui
